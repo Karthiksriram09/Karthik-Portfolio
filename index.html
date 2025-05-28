@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Karthik Sriram | Portfolio</title>
+
+  <!-- Fonts & Styles -->
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+        <div class="logo">
+          <i class="fas fa-code"></i> Karthik Sriram
+        </div>
+      
+        <!-- Hamburger Icon -->
+        <div class="hamburger" onclick="toggleMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
+      
+        <!-- Navigation Links -->
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      
+  </header>
+  
+
+  <!-- Hero Section -->
+  <section id="home" class="hero" data-aos="fade-up">
+    <div class="hero-content">
+      <h1>Hello, I'm <span class="highlight">Karthik Sriram</span></h1>
+      <h2>Aspiring Junior Software Developer</h2>
+      <p>Passionate about building intelligent solutions using full-stack development and machine learning.</p>
+      <div class="cta-buttons">
+        <a href="#projects" class="btn">View Projects</a>
+        <a href="#contact" class="btn secondary">Contact Me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Me Section -->
+  <section id="about" class="about-section" data-aos="fade-up">
+    <div class="container">
+      <h2>About Me</h2>
+      <p class="intro">
+        I'm a Computer Science student at Koneru Lakshmaiah University with a CGPA of 8.51. I enjoy building smart solutions using full-stack technologies and machine learning. I'm also certified in Red Hat, Salesforce AI, and Oracle GenAI.
+      </p>
+
+      <!-- Education -->
+      <div class="subsection">
+        <h3>🎓 Education</h3>
+        <div class="cards">
+          <div class="card" data-aos="fade-right">
+            <h4>Koneru Lakshmaiah University</h4>
+            <p>B.Tech CSE — 2022–Present</p>
+            <p>CGPA: 8.51/10</p>
+          </div>
+          <div class="card" data-aos="fade-up">
+            <h4>Sri Chaitanya, Guntur</h4>
+            <p>Intermediate — 2020–2022</p>
+          </div>
+          <div class="card" data-aos="fade-left">
+            <h4>Little Flower EM School, Guntur</h4>
+            <p>SSC — 2008–2020</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="subsection">
+        <h3>🛠️ Skills</h3>
+        <ul class="skills">
+          <li>C</li>
+          <li>Java</li>
+          <li>Python</li>
+          <li>JavaScript</li>
+          <li>HTML & CSS</li>
+          <li>MySQL</li>
+          <li>MongoDB</li>
+          <li>OOP</li>
+          <li>DSA</li>
+          <li>Spring Boot</li>
+          <li>PyTorch</li>
+        </ul>
+      </div>
+
+      <!-- Certifications -->
+      <div class="subsection">
+        <h3>📜 Certifications</h3>
+        <div class="certs">
+          <span class="cert">RED HAT Certified EA Developer</span>
+          <span class="cert">Salesforce AI Associate</span>
+          <span class="cert">Oracle GenAI Certified Pro</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects-section" data-aos="fade-up">
+    <div class="container">
+      <h2>Projects</h2>
+      <p class="subtext">Here are a few of my works in machine learning and full-stack development.</p>
+
+      <div class="project-grid">
+        <div class="project-card" data-aos="zoom-in-up">
+          <h3>Bone Fracture Detection</h3>
+          <p>Developed a CNN model to classify bone fractures in X-ray images with high accuracy.</p>
+          <a href="https://github.com/Karthiksriram09/Bone-Fracture-Detection-using-CNN" target="_blank">View on GitHub</a>
+          <div class="tags">
+            <span>#CNN</span><span>#DeepLearning</span><span>#MedicalAI</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-aos="zoom-in-up">
+          <h3>Loan Prediction</h3>
+          <p>Built an SVM model to predict loan approvals using customer data and risk analysis.</p>
+          <a href="https://github.com/Karthiksriram09/Fraud-Detection-in-Python" target="_blank">View on GitHub</a>
+          <div class="tags">
+            <span>#SVM</span><span>#ML</span><span>#Finance</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-aos="zoom-in-up">
+          <h3>Fraud Detection System</h3>
+          <p>Designed a machine learning solution to detect fraudulent financial transactions.</p>
+          <a href="https://github.com/Karthiksriram09/Fraud-Detection-in-Python" target="_blank">View on GitHub</a>
+          <div class="tags">
+            <span>#Python</span><span>#AnomalyDetection</span><span>#MachineLearning</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-aos="zoom-in-up">
+          <h3>Mental Health Web App</h3>
+          <p>Full-stack app offering mental health tests, resources, and real-time chat for students.</p>
+          <a href="https://github.com/Karthiksriram09/Hackathon_FINAL_TEAM_14-16" target="_blank">View on GitHub</a>
+          <div class="tags">
+            <span>#SpringBoot</span><span>#FullStack</span><span>#Hackathon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resume Section -->
+  <section class="resume-section" data-aos="fade-up">
+    <div class="container">
+      <h2>Resume</h2>
+      <p class="subtext">You can view or download my resume below.</p>
+      <a href="resume.pdf" target="_blank" class="btn">Download Resume</a>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section"  data-aos="fade-up">
+    <div class="container">
+      <h2>Contact Me</h2>
+      <p class="subtext">Have a project, job opportunity, or just want to connect? Let’s talk!</p>
+
+      <form class="contact-form" action="https://formsubmit.co/karthiksriram009@gmail.com" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+      
+
+      <div class="social-links">
+        <a href="https://github.com/Karthiksriram09" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/kudalikarthiksriram" target="_blank">LinkedIn</a>
+        <a href="https://x.com/karthiksriram_1" target="_blank">Twitter</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scripts at end of body -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+  </script>
+  <!-- Back to Top Button -->
+<button onclick="scrollToTop()" id="backToTop" title="Go to top">
+    ↑
+  </button>
+  <script>
+    // Show button after scrolling
+    window.onscroll = function () {
+      const btn = document.getElementById("backToTop");
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        btn.style.display = "block";
+      } else {
+        btn.style.display = "none";
+      }
+    };
+  
+    // Smooth scroll to top
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+<script>
+    function toggleMenu() {
+      const nav = document.getElementById("navLinks");
+      nav.classList.toggle("show");
+    }
+  </script>
+  
+    
+</body>
+</html>
