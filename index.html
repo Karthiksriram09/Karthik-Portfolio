@@ -70,10 +70,13 @@
     /* -------- HERO (center + animated) -------- */
     .hero{
       display:grid;grid-template-columns:1fr;justify-items:center;align-items:center;
-      gap:28px;min-height:calc(100vh - var(--header-h));text-align:center
+      gap:28px;min-height:calc(100vh - var(--header-h));text-align:center;
+      /* extra headroom above the H1 as requested */
+      padding-top:clamp(28px,6vh,72px);
     }
     .hero h1{
-      font-size:clamp(40px,7vw,88px);line-height:1.02;font-weight:800;letter-spacing:-.02em
+      font-size:clamp(40px,7vw,88px);line-height:1.02;font-weight:800;letter-spacing:-.02em;
+      margin-top:8px; /* a bit more breathing space below the navbar */
     }
     /* Animated gradient name */
     .gradient-text{
@@ -96,21 +99,56 @@
     .btn.primary{background:linear-gradient(90deg,#6d79ff 0%, #12c2e9 100%);color:#fff;border:none;box-shadow:var(--glow)}
     .btn:hover{transform:translateY(-2px)}
 
-    /* Hero visual panel */
-    .stage{width:min(860px,100%);height:420px;border:1px solid var(--stroke);border-radius:22px;background:var(--panel);
-      box-shadow:0 18px 60px rgba(2,6,23,.45);overflow:hidden;position:relative}
-    /* Moving blobs */
-    .orb{position:absolute;border-radius:50%;filter:blur(32px);mix-blend-mode:screen;opacity:.7}
-    .orb.one{width:260px;height:260px;background:#7c5cff;top:50px;left:50px}
-    .orb.two{width:320px;height:320px;background:#12c2e9;bottom:40px;right:60px}
-    /* Orbiting chips */
-    .chip-float{
-      position:absolute;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.08);backdrop-filter:blur(8px);font-weight:700;
-      animation:chipBob 6s ease-in-out infinite
+    /* ---------- HOLOGRAPHIC ORBITS (replaces old stage) ---------- */
+    .holo{
+      width:min(860px,100%);height:420px;border:1px solid var(--stroke);border-radius:22px;
+      position:relative;overflow:hidden;background:
+        radial-gradient(600px 300px at 20% 30%, rgba(124,92,255,.18), transparent 60%),
+        radial-gradient(600px 320px at 80% 60%, rgba(18,194,233,.16), transparent 60%),
+        var(--panel);
+      box-shadow:0 18px 60px rgba(2,6,23,.45);
     }
-    .chip-float i{color:var(--accent)}
-    @keyframes chipBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+    .holo .orb{position:absolute;border-radius:50%;filter:blur(34px);mix-blend-mode:screen;opacity:.7}
+    .holo .orb.one{width:260px;height:260px;background:#7c5cff;top:46px;left:50px}
+    .holo .orb.two{width:320px;height:320px;background:#12c2e9;bottom:40px;right:60px}
+
+    /* rings */
+    .ring{
+      position:absolute;left:50%;top:50%;translate:-50% -50%;
+      border-radius:999px;border:1px dashed rgba(255,255,255,.20);
+      box-shadow:0 0 0 1px rgba(255,255,255,.02) inset, 0 10px 40px rgba(18,194,233,.08) inset;
+      pointer-events:none;
+    }
+    .r1{width:78%;height:78%;}
+    .r2{width:58%;height:58%;}
+    .r3{width:36%;height:36%;border-style:solid;border-color:rgba(255,255,255,.28)}
+
+    /* orbit containers spin; nodes placed by CSS vars */
+    @keyframes spin { to { transform:rotate(360deg) } }
+    .orbit{position:absolute;inset:0;animation:spin linear infinite; }
+    .o1{animation-duration:28s}
+    .o2{animation-duration:22s; animation-direction:reverse}
+    .o3{animation-duration:18s}
+
+    .node{
+      position:absolute;left:50%;top:50%;
+      translate:-50% -50%;
+      transform:rotate(var(--a)) translate(var(--r)) rotate(calc(-1*var(--a)));
+    }
+    .bubble{
+      display:grid;place-items:center;
+      width:46px;height:46px;border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,.55) 45%, rgba(255,255,255,.18) 70%);
+      box-shadow:
+        0 10px 30px rgba(18,194,233,.18),
+        0 0 0 2px rgba(255,255,255,.06) inset,
+        0 0 24px rgba(124,92,255,.35);
+      color:#0b1020;
+    }
+    .bubble i{font-size:18px}
+    /* tiny bob on icon only so orbit path stays smooth */
+    @keyframes bob { 50% { transform: translateY(-4px) } }
+    .bubble{animation:bob 3.2s ease-in-out infinite}
 
     /* scrolling skills ribbon */
     .skills-ribbon{margin:26px auto 0;max-width:900px;mask-image:linear-gradient(90deg,transparent,black 12%,black 88%,transparent);overflow:hidden}
@@ -142,7 +180,11 @@
 
     /* Responsive */
     @media (max-width: 1024px){.cols-3{grid-template-columns:1fr 1fr}}
-    @media (max-width: 720px){.cols-2,.cols-3{grid-template-columns:1fr}.contact form{grid-template-columns:1fr}}
+    @media (max-width: 720px){
+      .cols-2,.cols-3{grid-template-columns:1fr}
+      .contact form{grid-template-columns:1fr}
+      .bubble{width:40px;height:40px}
+    }
   </style>
 </head>
 <body>
@@ -212,13 +254,36 @@
       </div>
     </div>
 
-    <!-- Hero visual with motion -->
-    <div class="stage tilt" data-tilt data-tilt-max="10" data-tilt-speed="400">
+    <!-- ✨ Holographic skill orbits (creative replacement) -->
+    <div class="holo tilt" aria-label="Skill orbits">
       <div class="orb one"></div>
       <div class="orb two"></div>
-      <div class="chip-float" id="chip1" style="top:24px;left:24px"><i class="fa-solid fa-code"></i> Clean APIs</div>
-      <div class="chip-float" id="chip2" style="bottom:24px;left:24px"><i class="fa-solid fa-gauge-high"></i> Perf & Caching</div>
-      <div class="chip-float" id="chip3" style="top:50%;right:22px;transform:translateY(-50%)"><i class="fa-solid fa-brain"></i> ML Pipelines</div>
+
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+      <div class="ring r3"></div>
+
+      <!-- Outer orbit -->
+      <div class="orbit o1">
+        <div class="node" style="--a: 10deg; --r: 40%"><div class="bubble" title="React"><i class="fa-brands fa-react"></i></div></div>
+        <div class="node" style="--a: 110deg; --r: 40%"><div class="bubble" title="Docker"><i class="fa-solid fa-cubes"></i></div></div>
+        <div class="node" style="--a: 210deg; --r: 40%"><div class="bubble" title="SQL"><i class="fa-solid fa-database"></i></div></div>
+        <div class="node" style="--a: 300deg; --r: 40%"><div class="bubble" title="FastAPI"><i class="fa-solid fa-bolt"></i></div></div>
+      </div>
+
+      <!-- Mid orbit -->
+      <div class="orbit o2">
+        <div class="node" style="--a: 45deg; --r: 30%"><div class="bubble" title="Python"><i class="fa-brands fa-python"></i></div></div>
+        <div class="node" style="--a: 165deg; --r: 30%"><div class="bubble" title="Flask"><i class="fa-solid fa-flask"></i></div></div>
+        <div class="node" style="--a: 285deg; --r: 30%"><div class="bubble" title="JS/TS"><i class="fa-brands fa-js"></i></div></div>
+      </div>
+
+      <!-- Inner orbit -->
+      <div class="orbit o3">
+        <div class="node" style="--a: 0deg; --r: 20%"><div class="bubble" title="Java"><i class="fa-brands fa-java"></i></div></div>
+        <div class="node" style="--a: 120deg; --r: 20%"><div class="bubble" title="Security"><i class="fa-solid fa-lock"></i></div></div>
+        <div class="node" style="--a: 240deg; --r: 20%"><div class="bubble" title="Cloud"><i class="fa-solid fa-cloud"></i></div></div>
+      </div>
     </div>
   </section>
 
@@ -369,13 +434,17 @@
     window.addEventListener('scroll',updateProgress,{passive:true}); updateProgress();
 
     // Tilt
-    if (window.VanillaTilt) { VanillaTilt.init(document.querySelectorAll('.tilt,.card'),{max:12,speed:400,glare:true,'max-glare':0.2}); }
+    if (window.VanillaTilt) {
+      VanillaTilt.init(document.querySelectorAll('.tilt,.card'),{
+        max:12,speed:400,glare:true,'max-glare':0.2
+      });
+    }
 
     // GSAP animations
     if (window.gsap){
       gsap.registerPlugin(ScrollTrigger);
 
-      // Hero text reveal (split-like: lines)
+      // Hero text reveal
       gsap.from(".hero h1 .gradient-text", { y:80, opacity:0, duration:1, ease:"power4.out", delay:.15 });
       gsap.from(".hero h1 em", { y:70, opacity:0, duration:1, ease:"power4.out", delay:.3 });
       gsap.from(".lead", { y:30, opacity:0, duration:.8, delay:.55 });
@@ -383,13 +452,18 @@
       gsap.from(".cta-row .btn", { y:24, opacity:0, stagger:.1, duration:.6, delay:.95 });
 
       // Blob float/parallax
-      gsap.to(".orb.one",{ y:"+=40", repeat:-1, yoyo:true, duration:6, ease:"sine.inOut" });
-      gsap.to(".orb.two",{ y:"-=40", repeat:-1, yoyo:true, duration:7, ease:"sine.inOut" });
+      gsap.to(".holo .orb.one",{ y:"+=40", repeat:-1, yoyo:true, duration:6, ease:"sine.inOut" });
+      gsap.to(".holo .orb.two",{ y:"-=40", repeat:-1, yoyo:true, duration:7, ease:"sine.inOut" });
 
-      // Orbiting chips around their anchor points
-      gsap.to("#chip1",{ rotation:360, transformOrigin:"left 50%", repeat:-1, duration:14, ease:"none" });
-      gsap.to("#chip2",{ rotation:-360, transformOrigin:"left 50%", repeat:-1, duration:16, ease:"none" });
-      gsap.to("#chip3",{ rotation:360, transformOrigin:"right 50%", repeat:-1, duration:18, ease:"none" });
+      // Gentle variance for icon bubbles so they feel alive
+      document.querySelectorAll('.bubble').forEach((b,i)=>{
+        gsap.to(b, {
+          x: gsap.utils.random(-4,4),
+          y: gsap.utils.random(-4,4),
+          repeat:-1, yoyo:true, duration:gsap.utils.random(2,3.8),
+          ease:"sine.inOut", delay:i*0.08
+        });
+      });
 
       // Section reveals
       gsap.utils.toArray("section").forEach((sec,i)=>{
@@ -403,4 +477,3 @@
   </script>
 </body>
 </html>
-
