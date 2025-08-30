@@ -5,220 +5,435 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Karthik Sriram | Portfolio</title>
 
-  <!-- Fonts & Styles -->
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 
+  <meta name="description" content="Karthik Sriram — Final‑year CS (AI & IPA) student. Full‑stack + Applied AI projects. Available for Product Engineering / Applied AI roles.">
+  <meta property="og:title" content="Karthik Sriram | Portfolio">
+  <meta property="og:description" content="Full‑stack & Applied AI projects, resume, and contact.">
+  <meta property="og:type" content="website">
+
+  <style>
+    :root{
+      --bg: #ffffff;
+      --text: #0f172a;      /* slate-900 */
+      --muted: #475569;     /* slate-600 */
+      --card: #f8fafc;      /* slate-50 */
+      --stroke:#e2e8f0;     /* slate-200 */
+      --accent:#6366f1;     /* indigo-500 */
+      --accent-2:#06b6d4;   /* cyan-500 */
+      --ring: rgba(99,102,241,.35);
+      --shadow: 0 10px 25px rgba(2,6,23,.08);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 120% -10%, rgba(99,102,241,.08), transparent 50%),
+        radial-gradient(1000px 700px at -10% -10%, rgba(6,182,212,.08), transparent 50%),
+        var(--bg);
+      line-height:1.7;
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* Layout helpers */
+    .container{max-width:1100px;margin:0 auto;padding:0 20px}
+    section{padding:80px 0}
+    .subtle{color:var(--muted)}
+
+    /* Fancy underline */
+    .fx-underline{position:relative;display:inline-block}
+    .fx-underline:after{
+      content:"";position:absolute;left:0;bottom:-6px;height:10px;width:100%;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      filter:blur(10px);opacity:.35
+    }
+
+    /* Navbar */
+    header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.75);backdrop-filter:blur(12px);border-bottom:1px solid var(--stroke)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.1rem}
+    .brand i{color:var(--accent)}
+    .nav ul{display:flex;align-items:center;gap:22px;list-style:none;margin:0;padding:0}
+    .nav a{color:var(--text);font-weight:600}
+    .nav a:hover{color:var(--accent)}
+    .hamburger{display:none;font-size:22px;cursor:pointer}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center}
+    .hero h1{font-size:clamp(32px,5vw,52px);line-height:1.1;margin:0 0 12px}
+    .hero p{max-width:58ch;margin:0 0 24px}
+    .badges{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+    .badge{background:linear-gradient(90deg,rgba(99,102,241,.12),rgba(6,182,212,.12));border:1px solid var(--stroke);padding:8px 12px;border-radius:999px;font-weight:600;font-size:.85rem}
+    .cta{display:flex;gap:14px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;font-weight:700;border:1px solid var(--stroke);background:#fff;box-shadow:var(--shadow)}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;border:none}
+    .btn:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(2,6,23,.12)}
+
+    /* Hero visual */
+    .orbit{
+      width:100%;height:420px;border-radius:var(--radius);position:relative;overflow:hidden;background:conic-gradient(from 180deg, rgba(99,102,241,.12), rgba(6,182,212,.12), rgba(99,102,241,.12));
+      border:1px solid var(--stroke);box-shadow:var(--shadow)
+    }
+    .chip{position:absolute;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--stroke);border-radius:999px;padding:10px 12px;font-weight:600;box-shadow:var(--shadow)}
+    .chip i{color:var(--accent)}
+
+    /* Cards grid */
+    .grid{display:grid;gap:22px}
+    .grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+    .card h3{margin:0 0 8px;font-size:1.1rem}
+    .card p{margin:0 0 12px}
+    .tag{display:inline-block;margin:.2rem .3rem 0 0;padding:6px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;font-weight:700;font-size:.75rem}
+
+    /* Section headings */
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px}
+    .section-head h2{margin:0;font-size:clamp(22px,3.4vw,32px)}
+
+    /* Timeline */
+    .timeline{display:grid;gap:18px}
+    .timeline .row{display:flex;gap:16px}
+    .timeline .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(90deg,var(--accent),var(--accent-2));margin-top:10px;flex:0 0 12px}
+    .timeline .content{flex:1;border-left:2px dashed var(--stroke);padding:6px 0 6px 16px}
+
+    /* Skills chips */
+    .chips{display:flex;flex-wrap:wrap;gap:10px}
+    .chip-pill{padding:10px 14px;border-radius:999px;border:1px solid var(--stroke);background:#fff;font-weight:600}
+
+    /* Contact */
+    .contact form{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+    .contact input,.contact textarea{
+      width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--stroke);font:inherit;background:#fff
+    }
+    .contact textarea{grid-column:1/-1;min-height:120px}
+    .contact .btn{grid-column:1/-1;justify-content:center}
+
+    /* Footer */
+    footer{border-top:1px solid var(--stroke);padding:28px 0;color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 960px){
+      .hero{grid-template-columns:1fr}
+      .orbit{height:340px}
+      .grid.cols-3{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 720px){
+      .grid.cols-2,.grid.cols-3{grid-template-columns:1fr}
+      .hamburger{display:block}
+      .nav ul{position:absolute;top:64px;right:16px;background:#fff;border:1px solid var(--stroke);border-radius:16px;box-shadow:var(--shadow);padding:12px;display:none;flex-direction:column;gap:10px;min-width:200px}
+      .nav ul.open{display:flex}
+      .contact form{grid-template-columns:1fr}
+    }
+
+    /* Micro-interactions */
+    .hover-raise{transition:transform .2s ease, box-shadow .2s ease}
+    .hover-raise:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(2,6,23,.12)}
+  </style>
 </head>
 
 <body>
-  <!-- Navbar -->
+  <!-- ===== Navbar ===== -->
   <header>
-    <nav class="navbar">
-        <div class="logo">
-          <i class="fas fa-code"></i> Karthik Sriram
-        </div>
-      
-        <!-- Hamburger Icon -->
-        <div class="hamburger" onclick="toggleMenu()">
-          <i class="fas fa-bars"></i>
-        </div>
-      
-        <!-- Navigation Links -->
-        <ul class="nav-links" id="navLinks">
+    <div class="container nav">
+      <div class="brand"><i class="fa-solid fa-code"></i> <span>Karthik Sriram</span></div>
+      <nav>
+        <div class="hamburger" id="hamburger" aria-label="Open Menu" role="button" tabindex="0"><i class="fa-solid fa-bars"></i></div>
+        <ul id="navlinks" aria-label="Primary">
           <li><a href="#home">Home</a></li>
           <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
           <li><a href="#projects">Projects</a></li>
+          <li><a href="#achievements">Achievements</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-      
+    </div>
   </header>
-  
 
-  <!-- Hero Section -->
-  <section id="home" class="hero" data-aos="fade-up">
-    <div class="hero-content">
-      <h1>Hello, I'm <span class="highlight">Karthik Sriram</span></h1>
-      <h2>Aspiring Junior Software Developer</h2>
-      <p>Passionate about building intelligent solutions using full-stack development and machine learning.</p>
-      <div class="cta-buttons">
-        <a href="#projects" class="btn">View Projects</a>
-        <a href="#contact" class="btn secondary">Contact Me</a>
+  <!-- ===== Hero ===== -->
+  <section id="home" class="container hero" data-aos="fade-up">
+    <div>
+      <h1>Hi, I'm <span class="fx-underline">Karthik Sriram</span></h1>
+      <p class="subtle">Final‑year CS (AI & Intelligent Process Automation) student • Pragmatic, test‑first builder who ships clean APIs and deployable prototypes.</p>
+      <div class="badges" aria-label="Focus areas">
+        <span class="badge"><i class="fa-solid fa-robot"></i> Applied AI</span>
+        <span class="badge"><i class="fa-solid fa-globe"></i> Full‑stack</span>
+        <span class="badge"><i class="fa-solid fa-rocket"></i> Product Engineering</span>
+      </div>
+      <div class="cta">
+        <a class="btn primary" href="#projects"><i class="fa-solid fa-folder-open"></i> View Projects</a>
+        <a class="btn" href="assets/Karthik_Sriram_Resume.pdf" target="_blank" rel="noopener"><i class="fa-solid fa-file-arrow-down"></i> Download Resume</a>
+        <a class="btn" href="https://www.linkedin.com/in/kudalikarthiksriram" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="orbit hover-raise" aria-hidden="true">
+      <div class="chip" style="top:28px;left:28px" data-aos="zoom-in"><i class="fa-solid fa-server"></i> Flask / FastAPI</div>
+      <div class="chip" style="bottom:28px;left:36px" data-aos="zoom-in" data-aos-delay="120"><i class="fa-solid fa-code"></i> React / Tailwind</div>
+      <div class="chip" style="top:60%;right:24px" data-aos="zoom-in" data-aos-delay="220"><i class="fa-solid fa-brain"></i> scikit‑learn</div>
+      <div class="chip" style="top:50%;left:50%;transform:translate(-50%,-50%)" data-aos="fade-up" data-aos-delay="380"><i class="fa-solid fa-gear"></i> Clean APIs</div>
+    </div>
+  </section>
+
+  <!-- ===== About ===== -->
+  <section id="about" class="container" data-aos="fade-up">
+    <div class="section-head">
+      <h2>About</h2>
+    </div>
+    <div class="grid cols-2">
+      <div class="card">
+        <h3>Who am I?</h3>
+        <p>
+          I'm a final‑year B.Tech CS student (AI & Intelligent Process Automation) at KL University, graduating Jun 2026. I enjoy designing clean backends, practical ML pipelines, and shipping small but useful products.
+        </p>
+        <p class="subtle">Based in Vijayawada, India • Open to roles in Product Engineering / Applied AI • Available immediately.</p>
+        <div class="chips" style="margin-top:10px">
+          <span class="chip-pill"><i class="fa-solid fa-check"></i> Test‑first</span>
+          <span class="chip-pill"><i class="fa-solid fa-diagram-project"></i> Modular</span>
+          <span class="chip-pill"><i class="fa-solid fa-gauge-high"></i> Performance‑minded</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Education</h3>
+        <div class="timeline">
+          <div class="row">
+            <div class="dot"></div>
+            <div class="content">
+              <strong>KL University (KLU) — B.Tech CSE, AI & IPA</strong>
+              <div class="subtle">Jul 2021 – Jun 2026 (Expected) • CGPA: 8.61/10</div>
+              <div class="subtle">Relevant: DSA, DBMS, OS, CN, ML, NLP, CV, SWE</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- About Me Section -->
-  <section id="about" class="about-section" data-aos="fade-up">
-    <div class="container">
-      <h2>About Me</h2>
-      <p class="intro">
-        I'm a Computer Science student at Koneru Lakshmaiah University with a CGPA of 8.51. I enjoy building smart solutions using full-stack technologies and machine learning. I'm also certified in Red Hat, Salesforce AI, and Oracle GenAI.
-      </p>
+  <!-- ===== Skills ===== -->
+  <section id="skills" class="container" data-aos="fade-up">
+    <div class="section-head">
+      <h2>Skills</h2>
+      <span class="subtle">Practical stacks I use to build & ship.</span>
+    </div>
 
-      <!-- Education -->
-      <div class="subsection">
-        <h3>🎓 Education</h3>
-        <div class="cards">
-          <div class="card" data-aos="fade-right">
-            <h4>Koneru Lakshmaiah University</h4>
-            <p>B.Tech CSE — 2022–Present</p>
-            <p>CGPA: 8.62/10</p>
-          </div>
-          <div class="card" data-aos="fade-up">
-            <h4>Sri Chaitanya, Guntur</h4>
-            <p>Intermediate — 2020–2022</p>
-          </div>
-          <div class="card" data-aos="fade-left">
-            <h4>Little Flower EM School, Guntur</h4>
-            <p>SSC — 2008–2020</p>
-          </div>
+    <div class="grid cols-3">
+      <div class="card">
+        <h3>Programming</h3>
+        <div class="chips">
+          <span class="chip-pill">Python</span>
+          <span class="chip-pill">Java</span>
+          <span class="chip-pill">JavaScript / TypeScript</span>
+          <span class="chip-pill">C</span>
+          <span class="chip-pill">SQL</span>
         </div>
       </div>
+      <div class="card">
+        <h3>ML / AI</h3>
+        <div class="chips">
+          <span class="chip-pill">scikit‑learn</span>
+          <span class="chip-pill">Transformers</span>
+          <span class="chip-pill">TensorFlow (basics)</span>
+          <span class="chip-pill">PyTorch (basics)</span>
+          <span class="chip-pill">spaCy / NLTK</span>
+          <span class="chip-pill">OpenCV</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Data</h3>
+        <div class="chips">
+          <span class="chip-pill">Pandas</span>
+          <span class="chip-pill">NumPy</span>
+          <span class="chip-pill">Feature Engg</span>
+          <span class="chip-pill">Model Tuning</span>
+          <span class="chip-pill">Evaluation & Viz</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Backend</h3>
+        <div class="chips">
+          <span class="chip-pill">Flask</span>
+          <span class="chip-pill">FastAPI</span>
+          <span class="chip-pill">Spring Boot (basics)</span>
+          <span class="chip-pill">REST • Auth • Caching</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Frontend</h3>
+        <div class="chips">
+          <span class="chip-pill">React</span>
+          <span class="chip-pill">HTML5</span>
+          <span class="chip-pill">CSS3</span>
+          <span class="chip-pill">Tailwind</span>
+          <span class="chip-pill">Responsive UI</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Dev / Deploy / Test</h3>
+        <div class="chips">
+          <span class="chip-pill">Git & GitHub</span>
+          <span class="chip-pill">Docker (basics)</span>
+          <span class="chip-pill">Jupyter</span>
+          <span class="chip-pill">Streamlit / Render / Vercel</span>
+          <span class="chip-pill">pytest / Jest</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <!-- Skills -->
-      <div class="subsection">
-        <h3>🛠️ Skills</h3>
-        <ul class="skills">
-          <li>C</li>
-          <li>Java</li>
-          <li>Python</li>
-          <li>JavaScript</li>
-          <li>HTML & CSS</li>
-          <li>MySQL</li>
-          <li>MongoDB</li>
-          <li>OOP</li>
-          <li>DSA</li>
-          <li>Spring Boot</li>
-          <li>PyTorch</li>
+  <!-- ===== Projects ===== -->
+  <section id="projects" class="container" data-aos="fade-up">
+    <div class="section-head">
+      <h2>Projects</h2>
+      <a class="btn" href="https://github.com/karthiksriram09" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> All Repos</a>
+    </div>
+
+    <div class="grid cols-3">
+      <article class="card hover-raise" data-aos="zoom-in-up">
+        <h3>HireSense Pro — AI Resume Analyzer & Role Recommender</h3>
+        <p>ATS‑style parsing, rule+ML scoring with explainable breakdown; role recommendations mapped to skills and keywords. Clear API endpoints; exportable PDF/CSV reports.</p>
+        <p class="subtle">Python • Flask • scikit‑learn</p>
+        <div>
+          <span class="tag">#NLP</span><span class="tag">#ATS</span><span class="tag">#Explainability</span>
+        </div>
+      </article>
+
+      <article class="card hover-raise" data-aos="zoom-in-up" data-aos-delay="80">
+        <h3>Conversational German Tutor</h3>
+        <p>Spaced‑repetition vocabulary with voice I/O; progress analytics and review cadence controls. Local SQLite persistence for offline use.</p>
+        <p class="subtle">Streamlit • spaCy/NLTK • SQLite</p>
+        <div>
+          <span class="tag">#SRS</span><span class="tag">#NLP</span><span class="tag">#EdTech</span>
+        </div>
+      </article>
+
+      <article class="card hover-raise" data-aos="zoom-in-up" data-aos-delay="120">
+        <h3>Library Management System (Full‑Stack)</h3>
+        <p>RBAC & CRUD APIs with indexed queries; clean REST endpoints (DTOs, env‑based configs). React client with protected routes & responsive admin/user views.</p>
+        <p class="subtle">Java • Spring Boot • MySQL • React</p>
+        <div>
+          <span class="tag">#FullStack</span><span class="tag">#SpringBoot</span><span class="tag">#React</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== Achievements & Certifications ===== -->
+  <section id="achievements" class="container" data-aos="fade-up">
+    <div class="section-head">
+      <h2>Achievements & Certifications</h2>
+    </div>
+
+    <div class="grid cols-2">
+      <div class="card">
+        <h3>Competitions & Workshops</h3>
+        <ul>
+          <li><strong>Walmart Sparkathon (2025)</strong> — Participant (Reimagining Customer Experience with Emerging Technologies)</li>
+          <li><strong>Web Development Workshop</strong> — IIT Hyderabad (Remark Skill Education), Feb 2025</li>
+          <li><strong>NSTAMAZE — CIS‑SOIREE 2024</strong> — R.V.R. & J.C. College of Engineering, Dec 2024</li>
         </ul>
       </div>
-
-      <!-- Certifications -->
-      <div class="subsection">
-        <h3>📜 Certifications</h3>
-        <div class="certs">
-          <span class="cert">RED HAT Certified EA Developer</span>
-          <span class="cert">Salesforce AI Associate</span>
-          <span class="cert">Oracle GenAI Certified Pro</span>
-        </div>
+      <div class="card">
+        <h3>Certifications</h3>
+        <ul>
+          <li>Red Hat Certified Enterprise Application Developer — Sep 2024</li>
+          <li>Salesforce Certified AI Associate — Oct 2024</li>
+          <li>Oracle Cloud Infrastructure Generative AI Certified Professional — Jun 2024</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="projects-section" data-aos="fade-up">
-    <div class="container">
-      <h2>Projects</h2>
-      <p class="subtext">Here are a few of my works in machine learning and full-stack development.</p>
+  <!-- ===== Resume CTA ===== -->
+  <section class="container" data-aos="fade-up">
+    <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
+      <div>
+        <h3 style="margin:0">Download my latest resume</h3>
+        <p class="subtle" style="margin:6px 0 0">PDF • Updated with education, skills, projects & certifications</p>
+      </div>
+      <a class="btn primary" href="assets/Karthik_Sriram_Resume.pdf" target="_blank" rel="noopener"><i class="fa-solid fa-file-pdf"></i> Get Resume</a>
+    </div>
+  </section>
 
-      <div class="project-grid">
-        <div class="project-card" data-aos="zoom-in-up">
-          <h3>Bone Fracture Detection</h3>
-          <p>Developed a CNN model to classify bone fractures in X-ray images with high accuracy.</p>
-          <a href="https://github.com/Karthiksriram09/Bone-Fracture-Detection-using-CNN" target="_blank">View on GitHub</a>
-          <div class="tags">
-            <span>#CNN</span><span>#DeepLearning</span><span>#MedicalAI</span>
-          </div>
-        </div>
-
-        <div class="project-card" data-aos="zoom-in-up">
-          <h3>Loan Prediction</h3>
-          <p>Built an SVM model to predict loan approvals using customer data and risk analysis.</p>
-          <a href="https://github.com/Karthiksriram09/Fraud-Detection-in-Python" target="_blank">View on GitHub</a>
-          <div class="tags">
-            <span>#SVM</span><span>#ML</span><span>#Finance</span>
-          </div>
-        </div>
-
-        <div class="project-card" data-aos="zoom-in-up">
-          <h3>Fraud Detection System</h3>
-          <p>Designed a machine learning solution to detect fraudulent financial transactions.</p>
-          <a href="https://github.com/Karthiksriram09/Fraud-Detection-in-Python" target="_blank">View on GitHub</a>
-          <div class="tags">
-            <span>#Python</span><span>#AnomalyDetection</span><span>#MachineLearning</span>
-          </div>
-        </div>
-
-        <div class="project-card" data-aos="zoom-in-up">
-          <h3>Mental Health Web App</h3>
-          <p>Full-stack app offering mental health tests, resources, and real-time chat for students.</p>
-          <a href="https://github.com/Karthiksriram09/Hackathon_FINAL_TEAM_14-16" target="_blank">View on GitHub</a>
-          <div class="tags">
-            <span>#SpringBoot</span><span>#FullStack</span><span>#Hackathon</span>
-          </div>
-        </div>
+  <!-- ===== Contact ===== -->
+  <section id="contact" class="container contact" data-aos="fade-up">
+    <div class="section-head">
+      <h2>Contact</h2>
+      <span class="subtle">Have a role, project, or collaboration in mind? Let's talk.</span>
+    </div>
+    <div class="grid cols-2">
+      <div class="card">
+        <form action="https://formsubmit.co/karthiksriram009@gmail.com" method="POST">
+          <input type="hidden" name="_captcha" value="false"/>
+          <input type="hidden" name="_subject" value="New message via portfolio"/>
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <textarea name="message" placeholder="Your Message" required></textarea>
+          <button class="btn primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Reach me directly</h3>
+        <p><i class="fa-solid fa-envelope"></i> <a href="mailto:karthiksriram009@gmail.com">karthiksriram009@gmail.com</a></p>
+        <p><i class="fa-solid fa-phone"></i> <a href="tel:+916281066825">+91 62810 66825</a></p>
+        <p><i class="fa-brands fa-github"></i> <a href="https://github.com/karthiksriram09" target="_blank" rel="noopener">github.com/karthiksriram09</a></p>
+        <p><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/kudalikarthiksriram" target="_blank" rel="noopener">linkedin.com/in/kudalikarthiksriram</a></p>
       </div>
     </div>
   </section>
 
-  <!-- Resume Section -->
-  <section class="resume-section" data-aos="fade-up">
-    <div class="container">
-      <h2>Resume</h2>
-      <p class="subtext">You can view or download my resume below.</p>
-      <a href="resume.pdf" target="_blank" class="btn">Download Resume</a>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="contact-section"  data-aos="fade-up">
-    <div class="container">
-      <h2>Contact Me</h2>
-      <p class="subtext">Have a project, job opportunity, or just want to connect? Let’s talk!</p>
-
-      <form class="contact-form" action="https://formsubmit.co/karthiksriram009@gmail.com" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-        <button type="submit" class="btn">Send Message</button>
-      </form>
-      
-
-      <div class="social-links">
-        <a href="https://github.com/Karthiksriram09" target="_blank">GitHub</a>
-        <a href="https://linkedin.com/in/kudalikarthiksriram" target="_blank">LinkedIn</a>
-        <a href="https://x.com/karthiksriram_1" target="_blank">Twitter</a>
+  <footer>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
+      <span>© <span id="year"></span> Karthik Sriram</span>
+      <div style="display:flex;gap:14px">
+        <a href="#home" class="subtle">Back to top ↑</a>
       </div>
     </div>
-  </section>
+  </footer>
 
-  <!-- Scripts at end of body -->
+  <!-- Floating Back-to-top Button -->
+  <button id="toTop" title="Go to top" aria-label="Back to top" class="hover-raise" style="position:fixed;right:22px;bottom:22px;border:none;background:linear-gradient(180deg,var(--accent),var(--accent-2));color:#fff;border-radius:999px;width:48px;height:48px;display:none;align-items:center;justify-content:center;box-shadow:var(--shadow)"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init({ duration: 1000, once: true });
-  </script>
-  <!-- Back to Top Button -->
-<button onclick="scrollToTop()" id="backToTop" title="Go to top">
-    ↑
-  </button>
-  <script>
-    // Show button after scrolling
-    window.onscroll = function () {
-      const btn = document.getElementById("backToTop");
-      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-        btn.style.display = "block";
-      } else {
-        btn.style.display = "none";
-      }
-    };
-  
-    // Smooth scroll to top
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  </script>
+    AOS.init({ duration: 900, once: true, offset: 80 });
 
-<script>
-    function toggleMenu() {
-      const nav = document.getElementById("navLinks");
-      nav.classList.toggle("show");
-    }
+    // mobile nav toggle
+    const hamburger = document.getElementById('hamburger');
+    const navlinks = document.getElementById('navlinks');
+    function toggleNav(){ navlinks.classList.toggle('open'); }
+    hamburger.addEventListener('click', toggleNav);
+    hamburger.addEventListener('keypress', (e)=>{ if(e.key==='Enter') toggleNav(); });
+
+    // active link highlight on scroll
+    const sections = [...document.querySelectorAll('section[id]')];
+    const navAnchors = [...navlinks.querySelectorAll('a')];
+    const spy = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        const id = entry.target.getAttribute('id');
+        const link = navAnchors.find(a=>a.getAttribute('href') === `#${id}`);
+        if(link){ link.style.color = entry.isIntersecting ? 'var(--accent)' : 'inherit'; }
+      })
+    },{rootMargin:'-45% 0px -50%'});
+    sections.forEach(sec=>spy.observe(sec));
+
+    // back-to-top
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll',()=>{
+      const y = window.scrollY || document.documentElement.scrollTop;
+      toTop.style.display = y > 380 ? 'flex' : 'none';
+    });
+    toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+    // year
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-  
-    
 </body>
 </html>
