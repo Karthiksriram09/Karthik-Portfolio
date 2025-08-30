@@ -71,12 +71,11 @@
     .hero{
       display:grid;grid-template-columns:1fr;justify-items:center;align-items:center;
       gap:28px;min-height:calc(100vh - var(--header-h));text-align:center;
-      /* extra headroom above the H1 as requested */
-      padding-top:clamp(28px,6vh,72px);
+      padding-top:clamp(32px,7vh,86px); /* extra breathing room above H1 */
     }
     .hero h1{
       font-size:clamp(40px,7vw,88px);line-height:1.02;font-weight:800;letter-spacing:-.02em;
-      margin-top:8px; /* a bit more breathing space below the navbar */
+      margin-top:8px;
     }
     /* Animated gradient name */
     .gradient-text{
@@ -112,9 +111,25 @@
     .holo .orb.one{width:260px;height:260px;background:#7c5cff;top:46px;left:50px}
     .holo .orb.two{width:320px;height:320px;background:#12c2e9;bottom:40px;right:60px}
 
+    /* Core in the middle for depth */
+    .core{
+      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+      width:86px;height:86px;border-radius:50%;
+      background:
+        radial-gradient(circle at 35% 35%, #fff, #cfe7ff 45%, rgba(255,255,255,.25) 70%),
+        radial-gradient(circle at 70% 70%, rgba(124,92,255,.45), transparent 60%);
+      box-shadow:0 0 0 3px rgba(255,255,255,.06) inset, 0 18px 48px rgba(18,194,233,.25);
+      display:grid;place-items:center;
+      animation:corePulse 3.2s ease-in-out infinite;
+      z-index:3;
+    }
+    .core i{color:#0b1020;font-size:22px;opacity:.75}
+    @keyframes corePulse { 50% { transform:translate(-50%,-50%) scale(1.05) } }
+
     /* rings */
     .ring{
-      position:absolute;left:50%;top:50%;translate:-50% -50%;
+      position:absolute;left:50%;top:50%;
+      transform:translate(-50%,-50%); /* classic transform for compatibility */
       border-radius:999px;border:1px dashed rgba(255,255,255,.20);
       box-shadow:0 0 0 1px rgba(255,255,255,.02) inset, 0 10px 40px rgba(18,194,233,.08) inset;
       pointer-events:none;
@@ -125,30 +140,30 @@
 
     /* orbit containers spin; nodes placed by CSS vars */
     @keyframes spin { to { transform:rotate(360deg) } }
-    .orbit{position:absolute;inset:0;animation:spin linear infinite; }
+    .orbit{position:absolute;inset:0;will-change:transform;animation:spin linear infinite; z-index:2;}
     .o1{animation-duration:28s}
     .o2{animation-duration:22s; animation-direction:reverse}
     .o3{animation-duration:18s}
 
     .node{
       position:absolute;left:50%;top:50%;
-      translate:-50% -50%;
-      transform:rotate(var(--a)) translate(var(--r)) rotate(calc(-1*var(--a)));
+      /* full chain so it works everywhere */
+      transform:translate(-50%,-50%) rotate(var(--a)) translateX(var(--r)) rotate(calc(-1*var(--a)));
+      will-change:transform;
     }
     .bubble{
       display:grid;place-items:center;
       width:46px;height:46px;border-radius:50%;
-      background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,.55) 45%, rgba(255,255,255,.18) 70%);
+      background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.95), rgba(255,255,255,.6) 45%, rgba(255,255,255,.22) 70%);
       box-shadow:
         0 10px 30px rgba(18,194,233,.18),
         0 0 0 2px rgba(255,255,255,.06) inset,
         0 0 24px rgba(124,92,255,.35);
-      color:#0b1020;
+      color:#0b1020; filter:drop-shadow(0 6px 12px rgba(0,0,0,.35));
+      animation:bob 3.2s ease-in-out infinite;
     }
     .bubble i{font-size:18px}
-    /* tiny bob on icon only so orbit path stays smooth */
-    @keyframes bob { 50% { transform: translateY(-4px) } }
-    .bubble{animation:bob 3.2s ease-in-out infinite}
+    @keyframes bob { 50% { transform:translateY(-4px) } }
 
     /* scrolling skills ribbon */
     .skills-ribbon{margin:26px auto 0;max-width:900px;mask-image:linear-gradient(90deg,transparent,black 12%,black 88%,transparent);overflow:hidden}
@@ -177,6 +192,11 @@
     .contact .btn{grid-column:1/-1;justify-content:center}
 
     footer{border-top:1px solid var(--stroke);padding:28px 0;text-align:center;color:var(--muted)}
+
+    /* Motion reduce */
+    @media (prefers-reduced-motion: reduce){
+      .orbit,.skills-line,.bubble,.core{animation:none}
+    }
 
     /* Responsive */
     @media (max-width: 1024px){.cols-3{grid-template-columns:1fr 1fr}}
@@ -254,10 +274,12 @@
       </div>
     </div>
 
-    <!-- ✨ Holographic skill orbits (creative replacement) -->
+    <!-- ✨ Holographic skill orbits -->
     <div class="holo tilt" aria-label="Skill orbits">
       <div class="orb one"></div>
       <div class="orb two"></div>
+
+      <div class="core"><i class="fa-solid fa-atom"></i></div>
 
       <div class="ring r1"></div>
       <div class="ring r2"></div>
@@ -455,7 +477,7 @@
       gsap.to(".holo .orb.one",{ y:"+=40", repeat:-1, yoyo:true, duration:6, ease:"sine.inOut" });
       gsap.to(".holo .orb.two",{ y:"-=40", repeat:-1, yoyo:true, duration:7, ease:"sine.inOut" });
 
-      // Gentle variance for icon bubbles so they feel alive
+      // Add micro jitter to each bubble so it feels alive
       document.querySelectorAll('.bubble').forEach((b,i)=>{
         gsap.to(b, {
           x: gsap.utils.random(-4,4),
