@@ -104,9 +104,13 @@
     .orb.one{width:260px;height:260px;background:#7c5cff;top:50px;left:50px}
     .orb.two{width:320px;height:320px;background:#12c2e9;bottom:40px;right:60px}
     /* Orbiting chips */
-    .chip-float{position:absolute;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.08);backdrop-filter:blur(8px);font-weight:700}
+    .chip-float{
+      position:absolute;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.08);backdrop-filter:blur(8px);font-weight:700;
+      animation:chipBob 6s ease-in-out infinite
+    }
     .chip-float i{color:var(--accent)}
+    @keyframes chipBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 
     /* scrolling skills ribbon */
     .skills-ribbon{margin:26px auto 0;max-width:900px;mask-image:linear-gradient(90deg,transparent,black 12%,black 88%,transparent);overflow:hidden}
@@ -399,3 +403,4 @@
   </script>
 </body>
 </html>
+
