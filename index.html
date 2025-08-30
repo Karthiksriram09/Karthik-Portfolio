@@ -1,346 +1,401 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Karthik Sriram | Portfolio</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="color-scheme" content="dark light"/>
+  <title>Karthik Sriram | Portfolio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<style>
-  /* ---- Tokens (brighter contrast) ---- */
-  :root{
-    --bg:#0b1020;
-    --panel:#0f1730;
-    --card:#111a33;
-    --text:#f3f7ff;        /* brighter */
-    --muted:#b6c6e3;       /* brighter */
-    --stroke:#223058;
-    --accent:#7c5cff;
-    --accent2:#12c2e9;
-    --radius:18px;
-    --maxw:1200px;
-    --header-h:72px;
-    --glow:0 14px 40px rgba(18,194,233,.26);
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{
-    font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial,sans-serif;
-    background:
-      radial-gradient(1100px 600px at 10% -10%, rgba(124,92,255,.16), transparent 60%),
-      radial-gradient(1100px 600px at 110% 0%, rgba(18,194,233,.14), transparent 60%),
-      var(--bg);
-    color:var(--text); line-height:1.65; overflow-x:hidden;
-  }
-  a{color:inherit;text-decoration:none}
-  .container{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-  section{padding:96px 0;scroll-margin-top:calc(var(--header-h) + 20px)}
-  .subtle{color:var(--muted)}
+  <!-- Motion libs -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
 
-  /* ---- Header ---- */
-  header{position:sticky;top:0;z-index:1000;height:var(--header-h);
-    background:color-mix(in hsl, var(--panel) 72%, transparent);
-    backdrop-filter:blur(14px);border-bottom:1px solid var(--stroke)}
-  .nav{height:100%;display:flex;align-items:center;justify-content:space-between}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:800}
-  .brand i{color:var(--accent)}
-  .nav ul{display:flex;gap:24px;list-style:none}
-  .nav a{font-weight:700;opacity:.9}
-  .nav a:hover,.nav a.active{opacity:1}
+  <style>
+    /* -------- TOKENS -------- */
+    :root{
+      --bg:#0b1020;
+      --panel:#0f1730;
+      --card:#111a33;
+      --text:#f3f7ff;
+      --muted:#b6c6e3;
+      --stroke:#223058;
+      --accent:#7c5cff;
+      --accent2:#12c2e9;
+      --radius:18px;
+      --maxw:1200px;
+      --header-h:72px;
+      --glow:0 14px 40px rgba(18,194,233,.26);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(1100px 600px at 10% -10%, rgba(124,92,255,.16), transparent 60%),
+        radial-gradient(1100px 600px at 110% 0%, rgba(18,194,233,.14), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.65;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+    section{padding:96px 0;scroll-margin-top:calc(var(--header-h) + 20px)}
+    .subtle{color:var(--muted)}
 
-  /* progress */
-  .progress{position:fixed;left:0;top:0;height:3px;width:100vw;transform-origin:0 0;transform:scaleX(0);
-    background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:1200}
+    /* -------- NAVBAR -------- */
+    header{
+      position:sticky;top:0;z-index:1000;height:var(--header-h);
+      background:color-mix(in hsl, var(--panel) 72%, transparent);
+      backdrop-filter:blur(14px);border-bottom:1px solid var(--stroke);
+    }
+    .nav{height:100%;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .brand i{color:var(--accent)}
+    .nav ul{display:flex;gap:24px;list-style:none}
+    .nav a{font-weight:700;opacity:.9}
+    .nav a:hover,.nav a.active{opacity:1}
 
-  /* ---- Hero (CENTERED) ---- */
-  .hero{display:grid;grid-template-columns:1fr;justify-items:center;align-items:center;gap:28px;min-height:calc(100vh - var(--header-h));text-align:center}
-  .hero h1{font-size:clamp(40px,7vw,88px);line-height:1.02;font-weight:800;letter-spacing:-.02em}
-  .gradient-text{background:linear-gradient(90deg,#8aa5ff 0%, #12c2e9 60%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .lead{color:var(--muted);max-width:76ch;margin:16px auto 22px}
-  .chip-row,.cta-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-  .chip{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:999px;font-weight:700;
-    border:1px solid var(--stroke);background:rgba(255,255,255,.04)}
-  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:800;
-    border:1px solid var(--stroke);background:rgba(255,255,255,.05);transition:transform .2s ease, box-shadow .2s ease}
-  .btn.primary{background:linear-gradient(90deg,#6d79ff 0%, #12c2e9 100%);color:#fff;border:none;box-shadow:var(--glow)}
-  .btn:hover{transform:translateY(-2px)}
-  .stage{width:min(860px,100%);height:420px;border:1px solid var(--stroke);border-radius:22px;background:var(--panel);
-    box-shadow:0 18px 60px rgba(2,6,23,.45);overflow:hidden}
-  .orb{position:absolute;border-radius:50%;filter:blur(26px);mix-blend-mode:screen;opacity:.75}
-  .orb.one{width:260px;height:260px;background:#7c5cff;top:44px;left:44px;animation:float 9s ease-in-out infinite}
-  .orb.two{width:320px;height:320px;background:#12c2e9;bottom:44px;right:60px;animation:float 11s ease-in-out infinite reverse}
-  @keyframes float{50%{transform:translateY(-16px)}}
-  .chip-float{position:absolute;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;
-    border:1px solid var(--stroke);background:rgba(255,255,255,.08);backdrop-filter:blur(6px);font-weight:700}
+    /* progress */
+    .progress{position:fixed;left:0;top:0;height:3px;width:100vw;transform-origin:0 0;transform:scaleX(0);
+      background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:1200}
 
-  /* ribbon */
-  .skills-ribbon{margin:26px auto 0;max-width:900px;mask-image:linear-gradient(90deg,transparent,black 12%,black 88%,transparent);overflow:hidden}
-  .skills-line{display:flex;gap:18px;white-space:nowrap;animation:scroll 28s linear infinite}
-  .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--stroke);padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.04)}
-  @keyframes scroll{to{transform:translateX(-50%)}}
+    /* -------- HERO (center + animated) -------- */
+    .hero{
+      display:grid;grid-template-columns:1fr;justify-items:center;align-items:center;
+      gap:28px;min-height:calc(100vh - var(--header-h));text-align:center
+    }
+    .hero h1{
+      font-size:clamp(40px,7vw,88px);line-height:1.02;font-weight:800;letter-spacing:-.02em
+    }
+    /* Animated gradient name */
+    .gradient-text{
+      background:linear-gradient(270deg,#6d79ff,#12c2e9,#6d79ff);
+      background-size:600% 600%;
+      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+      animation:gradientShift 8s ease infinite;
+    }
+    @keyframes gradientShift{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    .lead{color:var(--muted);max-width:76ch;margin:16px auto 22px}
+    .chip-row,.cta-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+    .chip{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:999px;font-weight:700;
+      border:1px solid var(--stroke);background:rgba(255,255,255,.04)}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:800;
+      border:1px solid var(--stroke);background:rgba(255,255,255,.05);transition:transform .2s ease, box-shadow .2s ease}
+    .btn.primary{background:linear-gradient(90deg,#6d79ff 0%, #12c2e9 100%);color:#fff;border:none;box-shadow:var(--glow)}
+    .btn:hover{transform:translateY(-2px)}
 
-  /* ---- Headings + Cards (brighter) ---- */
-  .section-head{text-align:center;margin-bottom:22px}
-  .section-head h2{font-size:clamp(24px,3.6vw,34px);margin:0}
-  .grid{display:grid;gap:22px}
-  .cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
-    border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:22px}
-  .card h3{margin:0 0 8px;color:#e7ecff}
-  .card p{color:#d7e3ff}
-  .tag{display:inline-block;margin:.25rem .35rem 0 0;padding:7px 11px;border-radius:999px;
-    background:rgba(124,92,255,.28);border:1px solid rgba(124,92,255,.6);color:#eef2ff;font-weight:700;font-size:.78rem}
+    /* Hero visual panel */
+    .stage{width:min(860px,100%);height:420px;border:1px solid var(--stroke);border-radius:22px;background:var(--panel);
+      box-shadow:0 18px 60px rgba(2,6,23,.45);overflow:hidden;position:relative}
+    /* Moving blobs */
+    .orb{position:absolute;border-radius:50%;filter:blur(32px);mix-blend-mode:screen;opacity:.7}
+    .orb.one{width:260px;height:260px;background:#7c5cff;top:50px;left:50px}
+    .orb.two{width:320px;height:320px;background:#12c2e9;bottom:40px;right:60px}
+    /* Orbiting chips */
+    .chip-float{position:absolute;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.08);backdrop-filter:blur(8px);font-weight:700}
+    .chip-float i{color:var(--accent)}
 
-  /* Contact */
-  .contact form{display:grid;gap:12px;grid-template-columns:1fr 1fr}
-  .contact input,.contact textarea{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--stroke);
-    background:rgba(255,255,255,.05);color:var(--text)}
-  .contact textarea{grid-column:1/-1;min-height:130px}
-  .contact .btn{grid-column:1/-1;justify-content:center}
+    /* scrolling skills ribbon */
+    .skills-ribbon{margin:26px auto 0;max-width:900px;mask-image:linear-gradient(90deg,transparent,black 12%,black 88%,transparent);overflow:hidden}
+    .skills-line{display:flex;gap:18px;white-space:nowrap;animation:scroll 28s linear infinite}
+    .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--stroke);padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.04)}
+    @keyframes scroll{to{transform:translateX(-50%)}}
 
-  footer{border-top:1px solid var(--stroke);padding:28px 0;text-align:center;color:var(--muted)}
+    /* -------- Sections & Cards -------- */
+    .section-head{text-align:center;margin-bottom:22px}
+    .section-head h2{font-size:clamp(24px,3.6vw,34px);margin:0}
+    .grid{display:grid;gap:22px}
+    .cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:22px}
+    .card h3{margin:0 0 8px;color:#e7ecff}
+    .card p{color:#d7e3ff}
+    .tag{display:inline-block;margin:.25rem .35rem 0 0;padding:7px 11px;border-radius:999px;
+      background:rgba(124,92,255,.28);border:1px solid rgba(124,92,255,.6);color:#eef2ff;font-weight:700;font-size:.78rem}
 
-  /* Responsive */
-  @media (max-width: 1024px){.cols-3{grid-template-columns:1fr 1fr}}
-  @media (max-width: 720px){.cols-2,.cols-3{grid-template-columns:1fr}.contact form{grid-template-columns:1fr}}
-</style>
+    /* Contact */
+    .contact form{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+    .contact input,.contact textarea{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--stroke);
+      background:rgba(255,255,255,.05);color:var(--text)}
+    .contact textarea{grid-column:1/-1;min-height:130px}
+    .contact .btn{grid-column:1/-1;justify-content:center}
+
+    footer{border-top:1px solid var(--stroke);padding:28px 0;text-align:center;color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 1024px){.cols-3{grid-template-columns:1fr 1fr}}
+    @media (max-width: 720px){.cols-2,.cols-3{grid-template-columns:1fr}.contact form{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
-<div id="progress" class="progress" aria-hidden="true"></div>
+  <!-- progress -->
+  <div id="progress" class="progress" aria-hidden="true"></div>
 
-<header>
-  <div class="container nav">
-    <div class="brand"><i class="fa-solid fa-code"></i> Karthik Sriram</div>
-    <nav>
-      <ul id="navlinks">
-        <li><a href="#home" class="active">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#achievements">Achievements</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
-<section id="home" class="container hero">
-  <div>
-    <h1><span class="gradient-text">Hi, I'm Karthik</span><br/>I build useful <em>Applied-AI</em> & full-stack products.</h1>
-    <p class="lead">Final-year CS (AI & Intelligent Process Automation) @ KLU • Pragmatic engineer who ships clean APIs, ML pipelines, and responsive UIs.</p>
-
-    <div class="chip-row" aria-label="focus">
-      <span class="chip"><i class="fa-solid fa-robot"></i> Applied AI</span>
-      <span class="chip"><i class="fa-solid fa-globe"></i> Full-stack</span>
-      <span class="chip"><i class="fa-solid fa-screwdriver-wrench"></i> Product Engineering</span>
+  <header>
+    <div class="container nav">
+      <div class="brand"><i class="fa-solid fa-code"></i> Karthik Sriram</div>
+      <nav>
+        <ul id="navlinks">
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#achievements">Achievements</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <div class="cta-row">
-      <a class="btn primary" href="#projects"><i class="fa-solid fa-folder-open"></i> View Projects</a>
-      <a class="btn" href="assets/Karthik_Sriram_Resume.pdf" target="_blank" rel="noopener"><i class="fa-solid fa-file-arrow-down"></i> Resume</a>
-      <a class="btn" href="https://www.linkedin.com/in/kudalikarthiksriram" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-    </div>
+  <!-- HERO -->
+  <section id="home" class="container hero">
+    <div>
+      <h1>
+        <span class="gradient-text">Hi, I'm Karthik</span><br/>
+        I build useful <em>Applied-AI</em> & full-stack products.
+      </h1>
+      <p class="lead">Final-year CS (AI & Intelligent Process Automation) @ KLU • Pragmatic engineer who ships clean APIs, ML pipelines, and responsive UIs.</p>
 
-    <div class="skills-ribbon">
-      <div class="skills-line">
-        <span class="pill"><i class="fa-brands fa-react"></i> React</span>
-        <span class="pill"><i class="fa-solid fa-brain"></i> scikit-learn</span>
-        <span class="pill"><i class="fa-solid fa-cubes"></i> Docker</span>
-        <span class="pill"><i class="fa-brands fa-python"></i> Python</span>
-        <span class="pill"><i class="fa-brands fa-java"></i> Java</span>
-        <span class="pill"><i class="fa-brands fa-js"></i> JS/TS</span>
-        <span class="pill"><i class="fa-solid fa-database"></i> SQL</span>
-        <span class="pill"><i class="fa-solid fa-flask"></i> Flask</span>
-        <span class="pill"><i class="fa-solid fa-bolt"></i> FastAPI</span>
-        <!-- duplicate for seamless loop -->
-        <span class="pill"><i class="fa-brands fa-react"></i> React</span>
-        <span class="pill"><i class="fa-solid fa-brain"></i> scikit-learn</span>
-        <span class="pill"><i class="fa-solid fa-cubes"></i> Docker</span>
-        <span class="pill"><i class="fa-brands fa-python"></i> Python</span>
-        <span class="pill"><i class="fa-brands fa-java"></i> Java</span>
-        <span class="pill"><i class="fa-brands fa-js"></i> JS/TS</span>
-        <span class="pill"><i class="fa-solid fa-database"></i> SQL</span>
-        <span class="pill"><i class="fa-solid fa-flask"></i> Flask</span>
-        <span class="pill"><i class="fa-solid fa-bolt"></i> FastAPI</span>
+      <div class="chip-row" aria-label="focus">
+        <span class="chip"><i class="fa-solid fa-robot"></i> Applied AI</span>
+        <span class="chip"><i class="fa-solid fa-globe"></i> Full-stack</span>
+        <span class="chip"><i class="fa-solid fa-screwdriver-wrench"></i> Product Engineering</span>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn primary" href="#projects"><i class="fa-solid fa-folder-open"></i> View Projects</a>
+        <a class="btn" href="assets/Karthik_Sriram_Resume.pdf" target="_blank" rel="noopener"><i class="fa-solid fa-file-arrow-down"></i> Resume</a>
+        <a class="btn" href="https://www.linkedin.com/in/kudalikarthiksriram" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+      </div>
+
+      <!-- ribbon -->
+      <div class="skills-ribbon">
+        <div class="skills-line">
+          <span class="pill"><i class="fa-brands fa-react"></i> React</span>
+          <span class="pill"><i class="fa-solid fa-brain"></i> scikit-learn</span>
+          <span class="pill"><i class="fa-solid fa-cubes"></i> Docker</span>
+          <span class="pill"><i class="fa-brands fa-python"></i> Python</span>
+          <span class="pill"><i class="fa-brands fa-java"></i> Java</span>
+          <span class="pill"><i class="fa-brands fa-js"></i> JS/TS</span>
+          <span class="pill"><i class="fa-solid fa-database"></i> SQL</span>
+          <span class="pill"><i class="fa-solid fa-flask"></i> Flask</span>
+          <span class="pill"><i class="fa-solid fa-bolt"></i> FastAPI</span>
+          <!-- duplicate for continuous loop -->
+          <span class="pill"><i class="fa-brands fa-react"></i> React</span>
+          <span class="pill"><i class="fa-solid fa-brain"></i> scikit-learn</span>
+          <span class="pill"><i class="fa-solid fa-cubes"></i> Docker</span>
+          <span class="pill"><i class="fa-brands fa-python"></i> Python</span>
+          <span class="pill"><i class="fa-brands fa-java"></i> Java</span>
+          <span class="pill"><i class="fa-brands fa-js"></i> JS/TS</span>
+          <span class="pill"><i class="fa-solid fa-database"></i> SQL</span>
+          <span class="pill"><i class="fa-solid fa-flask"></i> Flask</span>
+          <span class="pill"><i class="fa-solid fa-bolt"></i> FastAPI</span>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="stage tilt" data-tilt data-tilt-max="10" data-tilt-speed="400" style="position:relative">
-    <div class="orb one"></div>
-    <div class="orb two"></div>
-    <div class="chip-float" style="top:22px;left:22px"><i class="fa-solid fa-code"></i> Clean APIs</div>
-    <div class="chip-float" style="bottom:22px;left:22px"><i class="fa-solid fa-gauge-high"></i> Perf & Caching</div>
-    <div class="chip-float" style="top:50%;right:22px;transform:translateY(-50%)"><i class="fa-solid fa-brain"></i> ML Pipelines</div>
-  </div>
-</section>
+    <!-- Hero visual with motion -->
+    <div class="stage tilt" data-tilt data-tilt-max="10" data-tilt-speed="400">
+      <div class="orb one"></div>
+      <div class="orb two"></div>
+      <div class="chip-float" id="chip1" style="top:24px;left:24px"><i class="fa-solid fa-code"></i> Clean APIs</div>
+      <div class="chip-float" id="chip2" style="bottom:24px;left:24px"><i class="fa-solid fa-gauge-high"></i> Perf & Caching</div>
+      <div class="chip-float" id="chip3" style="top:50%;right:22px;transform:translateY(-50%)"><i class="fa-solid fa-brain"></i> ML Pipelines</div>
+    </div>
+  </section>
 
-<section id="about" class="container">
-  <div class="section-head">
-    <h2>About</h2>
-    <span class="subtle">Who I am & how I work</span>
-  </div>
-  <div class="grid cols-2">
-    <div class="card tilt">
-      <h3>Profile</h3>
-      <p>Final-year B.Tech CSE (AI & IPA) at KL University (graduating 2026). I design modular backends, practical feature pipelines, and crisp UIs.</p>
-      <div class="grid cols-2" style="margin-top:10px">
-        <div class="card"><strong>CGPA</strong><div class="subtle">8.61</div></div>
-        <div class="card"><strong>Focus</strong><div class="subtle">Applied AI • Full-stack</div></div>
+  <!-- ABOUT -->
+  <section id="about" class="container">
+    <div class="section-head">
+      <h2>About</h2>
+      <span class="subtle">Who I am & how I work</span>
+    </div>
+    <div class="grid cols-2">
+      <div class="card tilt">
+        <h3>Profile</h3>
+        <p>Final-year B.Tech CSE (AI & IPA) at KL University (graduating 2026). I like designing modular backends, practical feature pipelines, and UIs that feel crisp and responsive.</p>
+        <div class="grid cols-2" style="margin-top:10px">
+          <div class="card"><strong>CGPA</strong><div class="subtle">8.61</div></div>
+          <div class="card"><strong>Focus</strong><div class="subtle">Applied AI • Full-stack</div></div>
+        </div>
+      </div>
+      <div class="card tilt">
+        <h3>Education</h3>
+        <p><strong>KL University — B.Tech CSE (AI & IPA)</strong><br/>Jul 2021 – Jun 2026 (Expected)</p>
+        <p class="subtle">Relevant: DSA, DBMS, OS, CN, ML, NLP, CV, SWE</p>
       </div>
     </div>
-    <div class="card tilt">
-      <h3>Education</h3>
-      <p><strong>KL University — B.Tech CSE (AI & IPA)</strong><br/>Jul 2021 – Jun 2026 (Expected)</p>
-      <p class="subtle">Relevant: DSA, DBMS, OS, CN, ML, NLP, CV, SWE</p>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="container">
+    <div class="section-head">
+      <h2>Skills</h2>
+      <span class="subtle">Stacks I use to build & ship</span>
     </div>
-  </div>
-</section>
-
-<section id="skills" class="container">
-  <div class="section-head">
-    <h2>Skills</h2>
-    <span class="subtle">Stacks I use to build & ship</span>
-  </div>
-  <div class="grid cols-3">
-    <div class="card tilt"><h3>Programming</h3><div><span class="tag">Python</span><span class="tag">Java</span><span class="tag">C</span><span class="tag">JS/TS</span><span class="tag">SQL</span></div></div>
-    <div class="card tilt"><h3>ML / AI</h3><div><span class="tag">scikit-learn</span><span class="tag">Transformers</span><span class="tag">PyTorch</span><span class="tag">OpenCV</span></div></div>
-    <div class="card tilt"><h3>Backend</h3><div><span class="tag">Flask</span><span class="tag">FastAPI</span><span class="tag">Spring Boot</span></div></div>
-    <div class="card tilt"><h3>Frontend</h3><div><span class="tag">React</span><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">Tailwind</span></div></div>
-    <div class="card tilt"><h3>Data</h3><div><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Feature Engg</span><span class="tag">Tuning</span></div></div>
-    <div class="card tilt"><h3>Dev / Deploy / Test</h3><div><span class="tag">Git & GitHub</span><span class="tag">Docker</span><span class="tag">Jupyter</span><span class="tag">Render/Vercel</span></div></div>
-  </div>
-</section>
-
-<section id="projects" class="container">
-  <div class="section-head">
-    <h2>Projects</h2>
-    <a class="btn" href="https://github.com/karthiksriram09" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> All Repos</a>
-  </div>
-  <div class="grid cols-3">
-    <article class="card tilt">
-      <h3>HireSense Pro — AI Resume Analyzer</h3>
-      <p>ATS-style parsing, rule+ML scoring (explainable), and role recommendations mapped to skills & keywords. Exportable PDF/CSV.</p>
-      <div><span class="tag">#NLP</span><span class="tag">#ATS</span><span class="tag">#Explainability</span></div>
-    </article>
-    <article class="card tilt">
-      <h3>Conversational German Tutor</h3>
-      <p>Spaced-repetition vocabulary with voice I/O; progress analytics and cadence controls. SQLite offline mode.</p>
-      <div><span class="tag">#SRS</span><span class="tag">#NLP</span><span class="tag">#EdTech</span></div>
-    </article>
-    <article class="card tilt">
-      <h3>Library Management System (Full-Stack)</h3>
-      <p>RBAC, CRUD APIs with DTOs; React client with protected routes & responsive admin/user views.</p>
-      <div><span class="tag">#FullStack</span><span class="tag">#SpringBoot</span><span class="tag">#React</span></div>
-    </article>
-  </div>
-</section>
-
-<section id="achievements" class="container">
-  <div class="section-head"><h2>Achievements & Certifications</h2></div>
-  <div class="grid cols-2">
-    <div class="card tilt">
-      <h3>Competitions & Workshops</h3>
-      <ul>
-        <li><strong>Walmart Sparkathon (2025)</strong> — Participant</li>
-        <li><strong>Web Dev Workshop</strong> — IIT Hyderabad (Remark Skill Education), Feb 2025</li>
-        <li><strong>NSTAMAZE — CIS-SOIREE 2024</strong> — R.V.R. & J.C. College of Engineering</li>
-      </ul>
+    <div class="grid cols-3">
+      <div class="card tilt"><h3>Programming</h3><div><span class="tag">Python</span><span class="tag">Java</span><span class="tag">C</span><span class="tag">JS/TS</span><span class="tag">SQL</span></div></div>
+      <div class="card tilt"><h3>ML / AI</h3><div><span class="tag">scikit-learn</span><span class="tag">Transformers</span><span class="tag">PyTorch</span><span class="tag">OpenCV</span></div></div>
+      <div class="card tilt"><h3>Backend</h3><div><span class="tag">Flask</span><span class="tag">FastAPI</span><span class="tag">Spring Boot</span></div></div>
+      <div class="card tilt"><h3>Frontend</h3><div><span class="tag">React</span><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">Tailwind</span></div></div>
+      <div class="card tilt"><h3>Data</h3><div><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Feature Engg</span><span class="tag">Tuning</span></div></div>
+      <div class="card tilt"><h3>Dev / Deploy / Test</h3><div><span class="tag">Git & GitHub</span><span class="tag">Docker</span><span class="tag">Jupyter</span><span class="tag">Render/Vercel</span></div></div>
     </div>
-    <div class="card tilt">
-      <h3>Certifications</h3>
-      <ul>
-        <li>Red Hat Certified Enterprise Application Developer — 2024</li>
-        <li>Salesforce Certified AI Associate — 2024</li>
-        <li>OCI Generative AI Certified Professional — 2024</li>
-      </ul>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="container">
+    <div class="section-head">
+      <h2>Projects</h2>
+      <a class="btn" href="https://github.com/karthiksriram09" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> All Repos</a>
     </div>
-  </div>
-</section>
-
-<section id="contact" class="container contact">
-  <div class="section-head">
-    <h2>Contact</h2>
-    <span class="subtle">Have a role, project, or collaboration? Let's talk.</span>
-  </div>
-  <div class="grid cols-2">
-    <div class="card">
-      <form action="https://formsubmit.co/karthiksriram009@gmail.com" method="POST">
-        <input type="hidden" name="_captcha" value="false"/>
-        <input type="hidden" name="_subject" value="New message via portfolio"/>
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" placeholder="Your Message" required></textarea>
-        <button class="btn primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
-      </form>
+    <div class="grid cols-3">
+      <article class="card tilt">
+        <h3>HireSense Pro — AI Resume Analyzer</h3>
+        <p>ATS-style parsing, rule+ML scoring (explainable), and role recommendations mapped to skills & keywords. Exportable PDF/CSV.</p>
+        <div><span class="tag">#NLP</span><span class="tag">#ATS</span><span class="tag">#Explainability</span></div>
+      </article>
+      <article class="card tilt">
+        <h3>Conversational German Tutor</h3>
+        <p>Spaced-repetition vocabulary with voice I/O; progress analytics and cadence controls. SQLite offline mode.</p>
+        <div><span class="tag">#SRS</span><span class="tag">#NLP</span><span class="tag">#EdTech</span></div>
+      </article>
+      <article class="card tilt">
+        <h3>Library Management System (Full-Stack)</h3>
+        <p>RBAC, CRUD APIs with DTOs; React client with protected routes & responsive admin/user views.</p>
+        <div><span class="tag">#FullStack</span><span class="tag">#SpringBoot</span><span class="tag">#React</span></div>
+      </article>
     </div>
-    <div class="card">
-      <h3>Reach me directly</h3>
-      <p><i class="fa-solid fa-envelope"></i> <a href="mailto:karthiksriram009@gmail.com">karthiksriram009@gmail.com</a></p>
-      <p><i class="fa-solid fa-phone"></i> <a href="tel:+916281066825">+91 62810 66825</a></p>
-      <p><i class="fa-brands fa-github"></i> <a href="https://github.com/karthiksriram09" target="_blank" rel="noopener">github.com/karthiksriram09</a></p>
-      <p><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/kudalikarthiksriram" target="_blank" rel="noopener">linkedin.com/in/kudalikarthiksriram</a></p>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements" class="container">
+    <div class="section-head"><h2>Achievements & Certifications</h2></div>
+    <div class="grid cols-2">
+      <div class="card tilt">
+        <h3>Competitions & Workshops</h3>
+        <ul>
+          <li><strong>Walmart Sparkathon (2025)</strong> — Participant</li>
+          <li><strong>Web Dev Workshop</strong> — IIT Hyderabad (Remark Skill Education), Feb 2025</li>
+          <li><strong>NSTAMAZE — CIS-SOIREE 2024</strong> — R.V.R. & J.C. College of Engineering</li>
+        </ul>
+      </div>
+      <div class="card tilt">
+        <h3>Certifications</h3>
+        <ul>
+          <li>Red Hat Certified Enterprise Application Developer — 2024</li>
+          <li>Salesforce Certified AI Associate — 2024</li>
+          <li>OCI Generative AI Certified Professional — 2024</li>
+        </ul>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>© <span id="year"></span> Karthik Sriram</footer>
+  <!-- CONTACT -->
+  <section id="contact" class="container contact">
+    <div class="section-head">
+      <h2>Contact</h2>
+      <span class="subtle">Have a role, project, or collaboration? Let's talk.</span>
+    </div>
+    <div class="grid cols-2">
+      <div class="card">
+        <form action="https://formsubmit.co/karthiksriram009@gmail.com" method="POST">
+          <input type="hidden" name="_captcha" value="false"/>
+          <input type="hidden" name="_subject" value="New message via portfolio"/>
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Your Email" required />
+          <textarea name="message" placeholder="Your Message" required></textarea>
+          <button class="btn primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Reach me directly</h3>
+        <p><i class="fa-solid fa-envelope"></i> <a href="mailto:karthiksriram009@gmail.com">karthiksriram009@gmail.com</a></p>
+        <p><i class="fa-solid fa-phone"></i> <a href="tel:+916281066825">+91 62810 66825</a></p>
+        <p><i class="fa-brands fa-github"></i> <a href="https://github.com/karthiksriram09" target="_blank" rel="noopener">github.com/karthiksriram09</a></p>
+        <p><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/kudalikarthiksriram" target="_blank" rel="noopener">linkedin.com/in/kudalikarthiksriram</a></p>
+      </div>
+    </div>
+  </section>
 
-<script>
-  // Year
-  document.getElementById('year').textContent = new Date().getFullYear();
+  <footer>© <span id="year"></span> Karthik Sriram</footer>
 
-  // Smooth scroll
-  if (window.Lenis) {
-    const lenis = new Lenis({ lerp: .09, wheelMultiplier:1.05 });
-    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
-  }
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Active nav + progress
-  const links=[...document.querySelectorAll('#navlinks a')];
-  const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
-  const spy=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      const id='#'+e.target.id;
-      const link=links.find(a=>a.getAttribute('href')===id);
-      if(link){ link.classList.toggle('active', e.isIntersecting); }
-    });
-  },{rootMargin:'-55% 0px -45%'});
-  sections.forEach(s=>spy.observe(s));
-  const progress=document.getElementById('progress');
-  function updateProgress(){
-    const dh=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
-    const p=Math.max(0,Math.min(1,(window.scrollY||window.pageYOffset)/dh));
-    progress.style.transform=`scaleX(${p})`;
-  }
-  window.addEventListener('scroll',updateProgress,{passive:true}); updateProgress();
+    // Smooth scroll
+    if (window.Lenis) {
+      const lenis = new Lenis({ lerp:.1, wheelMultiplier:1.05 });
+      function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+    }
 
-  // Tilt
-  if(window.VanillaTilt){ VanillaTilt.init(document.querySelectorAll('.tilt, .card'),{max:10,speed:400,glare:true,'max-glare':0.2}); }
-
-  // GSAP reveals
-  if(window.gsap){
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.from('.hero h1',{y:22,opacity:0,duration:.8,ease:'power3.out'});
-    gsap.from('.lead',{y:16,opacity:0,duration:.6,delay:.1});
-    gsap.from('.chip-row .chip',{y:14,opacity:0,stagger:.05,duration:.5,delay:.15});
-    gsap.from('.cta-row .btn',{y:16,opacity:0,stagger:.07,duration:.5,delay:.2});
-    gsap.from('.stage',{scale:.985,opacity:0,duration:.7,delay:.12,ease:'power2.out'});
-    gsap.utils.toArray('section').forEach((sec,i)=>{
-      if(i===0) return;
-      gsap.from(sec.querySelectorAll('.section-head, .card, .tag'),{
-        scrollTrigger:{trigger:sec,start:'top 78%'},
-        y:22,opacity:0,duration:.55,stagger:.06,ease:'power2.out'
+    // Active nav + progress
+    const links=[...document.querySelectorAll('#navlinks a')];
+    const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const spy=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        const id='#'+e.target.id;
+        const link=links.find(a=>a.getAttribute('href')===id);
+        if(link){ link.classList.toggle('active', e.isIntersecting); }
       });
-    });
-  }
-</script>
+    },{rootMargin:'-55% 0px -45%'});
+    sections.forEach(s=>spy.observe(s));
+    const progress=document.getElementById('progress');
+    function updateProgress(){
+      const dh=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
+      const p=Math.max(0,Math.min(1,(window.scrollY||window.pageYOffset)/dh));
+      progress.style.transform=`scaleX(${p})`;
+    }
+    window.addEventListener('scroll',updateProgress,{passive:true}); updateProgress();
+
+    // Tilt
+    if (window.VanillaTilt) { VanillaTilt.init(document.querySelectorAll('.tilt,.card'),{max:12,speed:400,glare:true,'max-glare':0.2}); }
+
+    // GSAP animations
+    if (window.gsap){
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Hero text reveal (split-like: lines)
+      gsap.from(".hero h1 .gradient-text", { y:80, opacity:0, duration:1, ease:"power4.out", delay:.15 });
+      gsap.from(".hero h1 em", { y:70, opacity:0, duration:1, ease:"power4.out", delay:.3 });
+      gsap.from(".lead", { y:30, opacity:0, duration:.8, delay:.55 });
+      gsap.from(".chip-row .chip", { y:20, opacity:0, stagger:.08, duration:.6, delay:.75 });
+      gsap.from(".cta-row .btn", { y:24, opacity:0, stagger:.1, duration:.6, delay:.95 });
+
+      // Blob float/parallax
+      gsap.to(".orb.one",{ y:"+=40", repeat:-1, yoyo:true, duration:6, ease:"sine.inOut" });
+      gsap.to(".orb.two",{ y:"-=40", repeat:-1, yoyo:true, duration:7, ease:"sine.inOut" });
+
+      // Orbiting chips around their anchor points
+      gsap.to("#chip1",{ rotation:360, transformOrigin:"left 50%", repeat:-1, duration:14, ease:"none" });
+      gsap.to("#chip2",{ rotation:-360, transformOrigin:"left 50%", repeat:-1, duration:16, ease:"none" });
+      gsap.to("#chip3",{ rotation:360, transformOrigin:"right 50%", repeat:-1, duration:18, ease:"none" });
+
+      // Section reveals
+      gsap.utils.toArray("section").forEach((sec,i)=>{
+        if(i===0) return;
+        gsap.from(sec.querySelectorAll(".section-head, .card, .tag"),{
+          scrollTrigger:{ trigger:sec, start:"top 78%" },
+          y:32, opacity:0, duration:.6, ease:"power2.out", stagger:.08
+        });
+      });
+    }
+  </script>
 </body>
 </html>
