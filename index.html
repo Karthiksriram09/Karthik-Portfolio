@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="color-scheme" content="dark"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="color-scheme" content="dark light"/>
   <title>Karthik Sriram | Portfolio</title>
 
   <!-- Fonts & Icons -->
@@ -19,7 +19,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
 
   <style>
-    /* ============ TOKENS ============ */
+    /* -------- TOKENS -------- */
     :root{
       --bg:#0b1020;
       --panel:#0f1730;
@@ -33,7 +33,6 @@
       --maxw:1200px;
       --header-h:72px;
       --glow:0 14px 40px rgba(18,194,233,.26);
-      --shadow:0 18px 60px rgba(2,6,23,.45);
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{
@@ -42,16 +41,16 @@
         radial-gradient(1100px 600px at 10% -10%, rgba(124,92,255,.16), transparent 60%),
         radial-gradient(1100px 600px at 110% 0%, rgba(18,194,233,.14), transparent 60%),
         var(--bg);
-      color:var(--text); line-height:1.65; overflow-x:hidden;
+      color:var(--text);
+      line-height:1.65;
+      overflow-x:hidden;
     }
     a{color:inherit;text-decoration:none}
     .container{max-width:var(--maxw);margin:0 auto;padding:0 24px}
     section{padding:96px 0;scroll-margin-top:calc(var(--header-h) + 20px)}
     .subtle{color:var(--muted)}
-    .progress{position:fixed;left:0;top:0;height:3px;width:100vw;transform-origin:0 0;transform:scaleX(0);
-      background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:1200}
 
-    /* ============ NAV ============ */
+    /* -------- NAVBAR -------- */
     header{
       position:sticky;top:0;z-index:1000;height:var(--header-h);
       background:color-mix(in hsl, var(--panel) 72%, transparent);
@@ -62,66 +61,90 @@
     .brand i{color:var(--accent)}
     .nav ul{display:flex;gap:24px;list-style:none}
     .nav a{font-weight:700;opacity:.9}
-    .nav a:hover,.nav a.active{opacity:1;color:#fff}
+    .nav a:hover,.nav a.active{opacity:1}
 
-    /* ============ HERO ============ */
-    .hero{min-height:calc(100vh - var(--header-h));display:grid;grid-template-columns:1fr;justify-items:center;align-items:center;gap:24px;text-align:center;position:relative;overflow:hidden}
-    .hero h1{font-size:clamp(40px,7.2vw,88px);line-height:1.06;font-weight:800;letter-spacing:-.02em}
+    /* progress */
+    .progress{position:fixed;left:0;top:0;height:3px;width:100vw;transform-origin:0 0;transform:scaleX(0);
+      background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:1200}
+
+    /* -------- HERO (center + animated) -------- */
+    .hero{
+      display:grid;grid-template-columns:1fr;justify-items:center;align-items:center;
+      gap:28px;min-height:calc(100vh - var(--header-h));text-align:center
+    }
+    .hero h1{
+      font-size:clamp(40px,7vw,88px);line-height:1.02;font-weight:800;letter-spacing:-.02em
+    }
+    /* Animated gradient name */
     .gradient-text{
       background:linear-gradient(270deg,#6d79ff,#12c2e9,#6d79ff);
       background-size:600% 600%;
       -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
       animation:gradientShift 8s ease infinite;
     }
-    @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-    .lead{color:var(--muted);max-width:76ch;margin-top:6px}
-    .chip-row,.cta-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:10px}
-    .chip{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:999px;font-weight:700;border:1px solid var(--stroke);background:rgba(255,255,255,.05)}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:800;border:1px solid var(--stroke);background:rgba(255,255,255,.06);transition:transform .2s ease, box-shadow .2s ease}
+    @keyframes gradientShift{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    .lead{color:var(--muted);max-width:76ch;margin:16px auto 22px}
+    .chip-row,.cta-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+    .chip{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:999px;font-weight:700;
+      border:1px solid var(--stroke);background:rgba(255,255,255,.04)}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:800;
+      border:1px solid var(--stroke);background:rgba(255,255,255,.05);transition:transform .2s ease, box-shadow .2s ease}
     .btn.primary{background:linear-gradient(90deg,#6d79ff 0%, #12c2e9 100%);color:#fff;border:none;box-shadow:var(--glow)}
-    .btn:hover{transform:translateY(-3px)}
-    /* stage */
-    .stage{width:min(920px,100%);height:440px;border:1px solid var(--stroke);border-radius:22px;background:var(--panel);box-shadow:var(--shadow);overflow:hidden;position:relative}
-    .orb{position:absolute;border-radius:50%;filter:blur(38px);mix-blend-mode:screen;opacity:.75}
-    .orb.one{width:280px;height:280px;background:#7c5cff;top:54px;left:54px}
-    .orb.two{width:340px;height:340px;background:#12c2e9;bottom:54px;right:70px}
-    .chip-float{position:absolute;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.08);backdrop-filter:blur(6px);font-weight:700}
+    .btn:hover{transform:translateY(-2px)}
+
+    /* Hero visual panel */
+    .stage{width:min(860px,100%);height:420px;border:1px solid var(--stroke);border-radius:22px;background:var(--panel);
+      box-shadow:0 18px 60px rgba(2,6,23,.45);overflow:hidden;position:relative}
+    /* Moving blobs */
+    .orb{position:absolute;border-radius:50%;filter:blur(32px);mix-blend-mode:screen;opacity:.7}
+    .orb.one{width:260px;height:260px;background:#7c5cff;top:50px;left:50px}
+    .orb.two{width:320px;height:320px;background:#12c2e9;bottom:40px;right:60px}
+    /* Orbiting chips */
+    .chip-float{position:absolute;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.08);backdrop-filter:blur(8px);font-weight:700}
     .chip-float i{color:var(--accent)}
 
-    /* ============ SECTIONS / CARDS ============ */
+    /* scrolling skills ribbon */
+    .skills-ribbon{margin:26px auto 0;max-width:900px;mask-image:linear-gradient(90deg,transparent,black 12%,black 88%,transparent);overflow:hidden}
+    .skills-line{display:flex;gap:18px;white-space:nowrap;animation:scroll 28s linear infinite}
+    .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--stroke);padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.04)}
+    @keyframes scroll{to{transform:translateX(-50%)}}
+
+    /* -------- Sections & Cards -------- */
     .section-head{text-align:center;margin-bottom:22px}
     .section-head h2{font-size:clamp(24px,3.6vw,34px);margin:0}
     .grid{display:grid;gap:22px}
     .cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
     .cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:22px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:22px}
     .card h3{margin:0 0 8px;color:#e7ecff}
     .card p{color:#d7e3ff}
-    .tag{display:inline-block;margin:.25rem .35rem 0 0;padding:7px 11px;border-radius:999px;background:rgba(124,92,255,.28);border:1px solid rgba(124,92,255,.6);color:#eef2ff;font-weight:700;font-size:.78rem}
+    .tag{display:inline-block;margin:.25rem .35rem 0 0;padding:7px 11px;border-radius:999px;
+      background:rgba(124,92,255,.28);border:1px solid rgba(124,92,255,.6);color:#eef2ff;font-weight:700;font-size:.78rem}
 
-    /* ============ FLOATING SKILLS ============ */
-    .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:18px;margin-top:12px}
-    .skill{background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:18px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.18)}
-    .skill i{font-size:28px;margin-bottom:10px;color:var(--accent2)}
-    .skill span{display:block;font-weight:700}
-
-    /* CONTACT */
+    /* Contact */
     .contact form{display:grid;gap:12px;grid-template-columns:1fr 1fr}
-    .contact input,.contact textarea{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--stroke);background:rgba(255,255,255,.06);color:var(--text)}
+    .contact input,.contact textarea{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--stroke);
+      background:rgba(255,255,255,.05);color:var(--text)}
     .contact textarea{grid-column:1/-1;min-height:130px}
     .contact .btn{grid-column:1/-1;justify-content:center}
 
     footer{border-top:1px solid var(--stroke);padding:28px 0;text-align:center;color:var(--muted)}
 
-    /* ============ RESPONSIVE ============ */
-    @media (max-width:1024px){.cols-3{grid-template-columns:1fr 1fr}}
-    @media (max-width:720px){.cols-2,.cols-3{grid-template-columns:1fr}.contact form{grid-template-columns:1fr}}
+    /* Responsive */
+    @media (max-width: 1024px){.cols-3{grid-template-columns:1fr 1fr}}
+    @media (max-width: 720px){.cols-2,.cols-3{grid-template-columns:1fr}.contact form{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
+  <!-- progress -->
   <div id="progress" class="progress" aria-hidden="true"></div>
 
-  <!-- NAV -->
   <header>
     <div class="container nav">
       <div class="brand"><i class="fa-solid fa-code"></i> Karthik Sriram</div>
@@ -141,27 +164,56 @@
   <!-- HERO -->
   <section id="home" class="container hero">
     <div>
-      <h1><span class="gradient-text">Hi, I'm Karthik</span></h1>
-      <h1>I build useful <em>Applied-AI</em> & full-stack products.</h1>
+      <h1>
+        <span class="gradient-text">Hi, I'm Karthik</span><br/>
+        I build useful <em>Applied-AI</em> & full-stack products.
+      </h1>
       <p class="lead">Final-year CS (AI & Intelligent Process Automation) @ KLU • Pragmatic engineer who ships clean APIs, ML pipelines, and responsive UIs.</p>
-      <div class="chip-row">
+
+      <div class="chip-row" aria-label="focus">
         <span class="chip"><i class="fa-solid fa-robot"></i> Applied AI</span>
         <span class="chip"><i class="fa-solid fa-globe"></i> Full-stack</span>
         <span class="chip"><i class="fa-solid fa-screwdriver-wrench"></i> Product Engineering</span>
       </div>
+
       <div class="cta-row">
         <a class="btn primary" href="#projects"><i class="fa-solid fa-folder-open"></i> View Projects</a>
         <a class="btn" href="assets/Karthik_Sriram_Resume.pdf" target="_blank" rel="noopener"><i class="fa-solid fa-file-arrow-down"></i> Resume</a>
         <a class="btn" href="https://www.linkedin.com/in/kudalikarthiksriram" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
       </div>
+
+      <!-- ribbon -->
+      <div class="skills-ribbon">
+        <div class="skills-line">
+          <span class="pill"><i class="fa-brands fa-react"></i> React</span>
+          <span class="pill"><i class="fa-solid fa-brain"></i> scikit-learn</span>
+          <span class="pill"><i class="fa-solid fa-cubes"></i> Docker</span>
+          <span class="pill"><i class="fa-brands fa-python"></i> Python</span>
+          <span class="pill"><i class="fa-brands fa-java"></i> Java</span>
+          <span class="pill"><i class="fa-brands fa-js"></i> JS/TS</span>
+          <span class="pill"><i class="fa-solid fa-database"></i> SQL</span>
+          <span class="pill"><i class="fa-solid fa-flask"></i> Flask</span>
+          <span class="pill"><i class="fa-solid fa-bolt"></i> FastAPI</span>
+          <!-- duplicate for continuous loop -->
+          <span class="pill"><i class="fa-brands fa-react"></i> React</span>
+          <span class="pill"><i class="fa-solid fa-brain"></i> scikit-learn</span>
+          <span class="pill"><i class="fa-solid fa-cubes"></i> Docker</span>
+          <span class="pill"><i class="fa-brands fa-python"></i> Python</span>
+          <span class="pill"><i class="fa-brands fa-java"></i> Java</span>
+          <span class="pill"><i class="fa-brands fa-js"></i> JS/TS</span>
+          <span class="pill"><i class="fa-solid fa-database"></i> SQL</span>
+          <span class="pill"><i class="fa-solid fa-flask"></i> Flask</span>
+          <span class="pill"><i class="fa-solid fa-bolt"></i> FastAPI</span>
+        </div>
+      </div>
     </div>
 
-    <!-- Hero visual -->
+    <!-- Hero visual with motion -->
     <div class="stage tilt" data-tilt data-tilt-max="10" data-tilt-speed="400">
       <div class="orb one"></div>
       <div class="orb two"></div>
-      <div class="chip-float" id="chip1" style="top:22px;left:22px"><i class="fa-solid fa-code"></i> Clean APIs</div>
-      <div class="chip-float" id="chip2" style="bottom:22px;left:22px"><i class="fa-solid fa-gauge-high"></i> Perf & Caching</div>
+      <div class="chip-float" id="chip1" style="top:24px;left:24px"><i class="fa-solid fa-code"></i> Clean APIs</div>
+      <div class="chip-float" id="chip2" style="bottom:24px;left:24px"><i class="fa-solid fa-gauge-high"></i> Perf & Caching</div>
       <div class="chip-float" id="chip3" style="top:50%;right:22px;transform:translateY(-50%)"><i class="fa-solid fa-brain"></i> ML Pipelines</div>
     </div>
   </section>
@@ -175,7 +227,7 @@
     <div class="grid cols-2">
       <div class="card tilt">
         <h3>Profile</h3>
-        <p>Final-year B.Tech CSE (AI & IPA) at KL University (graduating 2026). I design modular backends, practical feature pipelines, and crisp UIs.</p>
+        <p>Final-year B.Tech CSE (AI & IPA) at KL University (graduating 2026). I like designing modular backends, practical feature pipelines, and UIs that feel crisp and responsive.</p>
         <div class="grid cols-2" style="margin-top:10px">
           <div class="card"><strong>CGPA</strong><div class="subtle">8.61</div></div>
           <div class="card"><strong>Focus</strong><div class="subtle">Applied AI • Full-stack</div></div>
@@ -189,23 +241,19 @@
     </div>
   </section>
 
-  <!-- SKILLS (FLOATING CARDS) -->
+  <!-- SKILLS -->
   <section id="skills" class="container">
     <div class="section-head">
       <h2>Skills</h2>
       <span class="subtle">Stacks I use to build & ship</span>
     </div>
-    <div class="skills-grid">
-      <div class="skill"><i class="fa-brands fa-python"></i><span>Python</span></div>
-      <div class="skill"><i class="fa-brands fa-java"></i><span>Java</span></div>
-      <div class="skill"><i class="fa-solid fa-code"></i><span>C</span></div>
-      <div class="skill"><i class="fa-brands fa-js"></i><span>JS/TS</span></div>
-      <div class="skill"><i class="fa-solid fa-database"></i><span>SQL</span></div>
-      <div class="skill"><i class="fa-brands fa-react"></i><span>React</span></div>
-      <div class="skill"><i class="fa-solid fa-flask"></i><span>Flask</span></div>
-      <div class="skill"><i class="fa-solid fa-bolt"></i><span>FastAPI</span></div>
-      <div class="skill"><i class="fa-solid fa-brain"></i><span>scikit-learn</span></div>
-      <div class="skill"><i class="fa-solid fa-cubes"></i><span>Docker</span></div>
+    <div class="grid cols-3">
+      <div class="card tilt"><h3>Programming</h3><div><span class="tag">Python</span><span class="tag">Java</span><span class="tag">C</span><span class="tag">JS/TS</span><span class="tag">SQL</span></div></div>
+      <div class="card tilt"><h3>ML / AI</h3><div><span class="tag">scikit-learn</span><span class="tag">Transformers</span><span class="tag">PyTorch</span><span class="tag">OpenCV</span></div></div>
+      <div class="card tilt"><h3>Backend</h3><div><span class="tag">Flask</span><span class="tag">FastAPI</span><span class="tag">Spring Boot</span></div></div>
+      <div class="card tilt"><h3>Frontend</h3><div><span class="tag">React</span><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">Tailwind</span></div></div>
+      <div class="card tilt"><h3>Data</h3><div><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Feature Engg</span><span class="tag">Tuning</span></div></div>
+      <div class="card tilt"><h3>Dev / Deploy / Test</h3><div><span class="tag">Git & GitHub</span><span class="tag">Docker</span><span class="tag">Jupyter</span><span class="tag">Render/Vercel</span></div></div>
     </div>
   </section>
 
@@ -297,14 +345,7 @@
       requestAnimationFrame(raf);
     }
 
-    // Progress + active nav
-    const progress=document.getElementById('progress');
-    function updateProgress(){
-      const dh=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
-      const p=Math.max(0,Math.min(1,(window.scrollY||window.pageYOffset)/dh));
-      progress.style.transform=`scaleX(${p})`;
-    }
-    window.addEventListener('scroll',updateProgress,{passive:true}); updateProgress();
+    // Active nav + progress
     const links=[...document.querySelectorAll('#navlinks a')];
     const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
     const spy=new IntersectionObserver((entries)=>{
@@ -313,49 +354,48 @@
         const link=links.find(a=>a.getAttribute('href')===id);
         if(link){ link.classList.toggle('active', e.isIntersecting); }
       });
-    },{rootMargin:'-55% 0px -45%'}); sections.forEach(s=>spy.observe(s));
+    },{rootMargin:'-55% 0px -45%'});
+    sections.forEach(s=>spy.observe(s));
+    const progress=document.getElementById('progress');
+    function updateProgress(){
+      const dh=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
+      const p=Math.max(0,Math.min(1,(window.scrollY||window.pageYOffset)/dh));
+      progress.style.transform=`scaleX(${p})`;
+    }
+    window.addEventListener('scroll',updateProgress,{passive:true}); updateProgress();
 
     // Tilt
-    if(window.VanillaTilt){ VanillaTilt.init(document.querySelectorAll('.tilt,.card'),{max:12,speed:400,glare:true,'max-glare':0.2}); }
+    if (window.VanillaTilt) { VanillaTilt.init(document.querySelectorAll('.tilt,.card'),{max:12,speed:400,glare:true,'max-glare':0.2}); }
 
-    // GSAP hero + blobs + chips
-    if(window.gsap){
+    // GSAP animations
+    if (window.gsap){
       gsap.registerPlugin(ScrollTrigger);
-      gsap.from(".hero h1 .gradient-text",{y:90,opacity:0,duration:1,ease:"power4.out",delay:.1});
-      gsap.from(".hero h1 em",{y:80,opacity:0,duration:1,ease:"power4.out",delay:.28});
-      gsap.from(".lead",{y:28,opacity:0,duration:.8,delay:.5});
-      gsap.from(".chip-row .chip",{y:18,opacity:0,stagger:.07,duration:.55,delay:.7});
-      gsap.from(".cta-row .btn",{y:22,opacity:0,stagger:.07,duration:.55,delay:.9});
+
+      // Hero text reveal (split-like: lines)
+      gsap.from(".hero h1 .gradient-text", { y:80, opacity:0, duration:1, ease:"power4.out", delay:.15 });
+      gsap.from(".hero h1 em", { y:70, opacity:0, duration:1, ease:"power4.out", delay:.3 });
+      gsap.from(".lead", { y:30, opacity:0, duration:.8, delay:.55 });
+      gsap.from(".chip-row .chip", { y:20, opacity:0, stagger:.08, duration:.6, delay:.75 });
+      gsap.from(".cta-row .btn", { y:24, opacity:0, stagger:.1, duration:.6, delay:.95 });
 
       // Blob float/parallax
-      gsap.to(".orb.one",{x:20,y:18,repeat:-1,yoyo:true,duration:6,ease:"sine.inOut"});
-      gsap.to(".orb.two",{x:-26,y:-22,repeat:-1,yoyo:true,duration:7,ease:"sine.inOut"});
+      gsap.to(".orb.one",{ y:"+=40", repeat:-1, yoyo:true, duration:6, ease:"sine.inOut" });
+      gsap.to(".orb.two",{ y:"-=40", repeat:-1, yoyo:true, duration:7, ease:"sine.inOut" });
 
-      // Orbiting chips (gentle)
-      gsap.to("#chip1",{ rotation:360, transformOrigin:"left 50%", repeat:-1, duration:16, ease:"none" });
-      gsap.to("#chip2",{ rotation:-360, transformOrigin:"left 50%", repeat:-1, duration:18, ease:"none" });
-      gsap.to("#chip3",{ rotation:360, transformOrigin:"right 50%", repeat:-1, duration:20, ease:"none" });
+      // Orbiting chips around their anchor points
+      gsap.to("#chip1",{ rotation:360, transformOrigin:"left 50%", repeat:-1, duration:14, ease:"none" });
+      gsap.to("#chip2",{ rotation:-360, transformOrigin:"left 50%", repeat:-1, duration:16, ease:"none" });
+      gsap.to("#chip3",{ rotation:360, transformOrigin:"right 50%", repeat:-1, duration:18, ease:"none" });
 
       // Section reveals
       gsap.utils.toArray("section").forEach((sec,i)=>{
         if(i===0) return;
         gsap.from(sec.querySelectorAll(".section-head, .card, .tag"),{
           scrollTrigger:{ trigger:sec, start:"top 78%" },
-          y:30, opacity:0, duration:.6, ease:"power2.out", stagger:.07
+          y:32, opacity:0, duration:.6, ease:"power2.out", stagger:.08
         });
       });
     }
-
-    // Floating skills animation
-    document.querySelectorAll(".skill").forEach((el,i)=>{
-      gsap.to(el,{y:16,repeat:-1,yoyo:true,duration:2+Math.random()*2,delay:i*.06,ease:"sine.inOut"});
-      gsap.to(el,{rotation:Math.random()>0.5?5:-5,repeat:-1,yoyo:true,duration:3+Math.random()*2,ease:"sine.inOut"});
-      el.addEventListener('mousemove',(e)=>{
-        const r=el.getBoundingClientRect(); const x=e.clientX-r.left-r.width/2; const y=e.clientY-r.top-r.height/2;
-        el.style.transform=`translateY(${Math.sin(Date.now()/500)*2}px) rotate(${x*0.02}deg)`;
-      });
-      el.addEventListener('mouseleave',()=>{ el.style.transform='translateY(0) rotate(0)'; });
-    });
   </script>
 </body>
 </html>
